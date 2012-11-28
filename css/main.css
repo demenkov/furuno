@@ -1,0 +1,93 @@
+* {
+	background-color	: #000000;
+	color				: #FFFFFF;
+	font-family			: "Droid Sans Mono","FreeMono","Courier New", monospace;
+}
+
+.navbar-inverse .navbar-inner {
+	background-color	: #000000;
+	background-image	: none;
+	border-color		: #000000;
+}
+
+.navbar-inner .container div > ul {
+	border-bottom: 1px dashed #FFFFFF;
+}
+
+.navbar-inverse .brand,
+.navbar-inverse .nav > li > a,
+.dropdown-menu li > a {
+    color: #FFFFFF;
+    text-shadow: none;
+}
+
+.navbar-inverse .brand,
+.navbar-inverse .nav > li > a:hover,
+.dropdown-menu li > a:hover,
+.navbar-inverse .nav > li > a:focus,
+.dropdown-menu li > a:focus,
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle,
+.navbar-inverse .nav li.dropdown.active > .dropdown-toggle,
+.navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
+    background-color: #FFFFFF;
+    color: #000;
+}
+
+.navbar .nav > li > a {
+    padding: 0;
+}
+.navbar .nav > li {
+	padding: 10px 15px;
+}
+
+.dropdown-menu li > a:hover,
+.dropdown-menu li > a:focus,
+.dropdown-submenu:hover > a {
+	background-color	: #FFFFFF;
+	background-image	: none;
+	color				: #000000;
+	text-decoration		: none;
+}
+
+.dropdown-menu {
+	background-clip		: none;
+	background-color	: #000000;
+	border				: 1px solid #FFFFFF;
+	border-radius		: 0;
+	box-shadow			: none;
+	list-style			: none outside none;
+	margin				: 0;
+	padding				: 0;
+}
+
+.navbar .nav > li > .dropdown-menu:after,
+.navbar .nav > li > .dropdown-menu:before {
+	border-bottom	: none;
+	border-left		: none;
+	border-right	: none;
+}
+
+.dropdown-menu li {
+    padding: 1px 10px;
+}
+
+.dropdown-menu li > a {
+    padding: 1px 10px;
+    white-space: nowrap;
+}
+
+.dropdown-menu .divider {
+	background-color	: #000000;
+	border-bottom		: 1px dashed #FFFFFF;
+	height				: 1px;
+	margin				: 0 10px;
+	overflow			: hidden;
+}
+
+.dropdown-menu {
+    list-style: none outside none;
+}
+
+.open > .dropdown-menu {
+    margin-top: 10px;
+}
