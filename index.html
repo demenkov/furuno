@@ -13,136 +13,156 @@
 		<title>Felcom 11</title>
 	</head>
 	<body class="tab-content">
-		<header class="navbar navbar-inverse navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<div id = "menu" class="nav-collapse collapse">
-						<ul class="nav">
-							<li class = "dropdown">
-								<a id = "f1" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
-									File
-								</a>
-								<ul class="dropdown-menu" aria-labelledby="f1" role="menu">
-									<li><a href = "#">1:New</a></li>
-									<li><a href = "#">2:Open</a></li>
-									<li><a href = "#">3:Close</a></li>
-									<li class="divider"></li>
-									<li><a href = "#">4:Delete</a></li>
-									<li class="divider"></li>
-									<li><a href = "#">5:Save</a></li>
-									<li class="divider"></li>
-									<li><a href = "#">6:Print</a></li>
-									<li class="divider"></li>
-									<li><a href = "#">7:Format Disk</a></li>
-									<li class="divider"></li>
-									<li><a href = "#">8:Quit</a></li>
-								</ul>
-							</li>
-							<li class = "dropdown">
-								<a id = "f2" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
-									Edit
-								</a>
-								<ul class="dropdown-menu" aria-labelledby="f2" role="menu">
-									<li><a href = "#">1:Undo</a></li>
-									<li><a href = "#">2:Cut</a></li>
-									<li><a href = "#">3:Copy</a></li>
-									<li><a href = "#">4:Paste</a></li>
-									<li><a href = "#">5:Goto Top</a></li>
-									<li><a href = "#">6:Goto Bottom</a></li>
-									<li><a href = "#">7:Change window</a></li>
-								</ul>
-							</li>
-							<li class = "dropdown">
-								<a id = "f3" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
-									Send/Rec
-								</a>
-								<ul class="dropdown-menu" aria-labelledby="f3" role="menu">
-									<li><a href = "#">1:Send</a></li>
-									<li><a href = "#">2:Data Report</a></li>
-									<li><a href = "#">3:Receive message</a></li>
-									<li><a href = "#">4:EGC</a></li>
-									<li><a href = "#">5:Log</a></li>
-								</ul>
-							</li>
-							<li class = "dropdown">
-								<a id = "f4" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
-									Command
-								</a>
-								<ul class="dropdown-menu" aria-labelledby="f4" role="menu">
-									<li><a href = "#">1:Abort</a></li>
-									<li><a href = "#">2:Login</a></li>
-									<li><a href = "#">3:Logout</a></li>
-									<li><a href = "#">4:Scan NCS</a></li>
-									<li><a href = "#">5:Select NCS</a></li>
-									<li><a href = "#">6:Stop Alarm</a></li>
-								</ul>
-							</li>
-							<li class = "dropdown">
-								<a id = "f5" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
-									System
-								</a>
-								<ul class="dropdown-menu" aria-labelledby="f5" role="menu">
-									<li><a href = "#">1:System Setup</a></li>
-									<li><a href = "#">2:EGC Setup</a></li>
-									<li><a href = "#">3:NCS Channel List</a></li>
-									<li><a href = "#">4:EGC Channel List</a></li>
-									<li><a href = "#">5:LES List</a></li>
-									<li><a href = "#">6:Station List</a></li>
-									<li><a href = "#">7:Ship Position</a></li>
-								</ul>
-							</li>
-							<li class = "dropdown">
-								<a id = "f6" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
-									Term
-								</a>
-								<ul class="dropdown-menu" aria-labelledby="f6" role="menu">
-									<li><a href = "#">1:Auto Log Print</a></li>
-									<li><a href = "#">2:Recieve Alarm</a></li>
-									<li><a href = "#">3:Auto Telex MSG Save</a></li>
-									<li><a href = "#">4:Auto EGC MSG Save</a></li>
-									<li><a href = "#">5:DTE Type</a></li>
-									<li><a href = "#">6:MSG Directory</a></li>
-								</ul>
-							</li>
-							<li class = "dropdown">
-								<a id = "f7" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
-									Editor
-								</a>
-							</li>
-							<li class = "dropdown">
-								<a id = "f8" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
-									Disp
-								</a>
-								<ul class="dropdown-menu" aria-labelledby="f8" role="menu">
-									<li><a href = "#">1:System Status Monitor</a></li>
-									<li><a href = "#">2:Network Configuration</a></li>
-									<li><a href = "#">3:PV Test Results</a></li>
-								</ul>
-							</li>
-							<li class = "dropdown">
-								<a id = "f9" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
-									Test
-								</a>
-								<ul class="dropdown-menu" aria-labelledby="f9" role="menu">
-									<li><a href = "#">1:PV Test</a></li>
-									<li><a href = "#">2:Self Tests</a></li>
-								</ul>
-							</li>
-							<li class = "dropdown">
-								<a id = "f10" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
-									Distress
-								</a>
-								<ul class="dropdown-menu" aria-labelledby="f10" role="menu">
-									<li><a href = "#">1:Activate Distress Alert</a></li>
-									<li><a href = "#">2:Update Distress Alert</a></li>
-									<li><a href = "#">3:Activate Distress Alert Test</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
+		<div id = "monitor">
+			<h3 class = "logo">FURUNO</h3>
+			<div id = "display">
+				<div id = "menu">
+					<ul class="nav">
+						<li class = "dropdown">
+							<a id = "f1" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
+								File
+							</a>
+							<ul class="dropdown-menu f1" aria-labelledby="f1" role="menu">
+								<li><a href = "#">1:New <span>ALT-N</span></a></li>
+								<li><a href = "#">2:Open <span>ALT-Q</span></a></li>
+								<li><a href = "#">3:Close <span>ALT-X</span></a></li>
+								<li class="divider"></li>
+								<li><a href = "#">4:Delete <span>ALT-D</span></a></li>
+								<li class="divider"></li>
+								<li><a href = "#">5:Save <span>ALT-S</span></a></li>
+								<li class="divider"></li>
+								<li><a href = "#">6:Print <span>ALT-P</span></a></li>
+								<li class="divider"></li>
+								<li><a href = "#">7:Format Disk</a></li>
+								<li class="divider"></li>
+								<li><a href = "#">8:Quit</a></li>
+							</ul>
+						</li>
+						<li class = "dropdown">
+							<a id = "f2" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
+								Edit
+							</a>
+							<ul class="dropdown-menu f2" aria-labelledby="f2" role="menu">
+								<li><a href = "#">1:Undo <span>ALT-X</span></a></li>
+								<li><a href = "#">2:Cut <span>DELETE</span></a></li>
+								<li><a href = "#">3:Copy <span>ALT-C</span></a></li>
+								<li><a href = "#">4:Paste <span>INSERT</span></a></li>
+								<li><a href = "#">5:Goto Top <span>HOME</span></a></li>
+								<li><a href = "#">6:Goto Bottom <span>END</span></a></li>
+								<li><a href = "#">7:Change window <span>ALT-V</span></a></li>
+							</ul>
+						</li>
+						<li class = "dropdown">
+							<a id = "f3" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
+								Send/Rec
+							</a>
+							<ul class="dropdown-menu f3" aria-labelledby="f3" role="menu">
+								<li><a href = "#">1:Send</a></li>
+								<li><a href = "#">2:Data Report</a></li>
+								<li><a href = "#">3:Receive message</a></li>
+								<li><a href = "#">4:EGC</a></li>
+								<li><a href = "#">5:Log</a></li>
+							</ul>
+						</li>
+						<li class = "dropdown">
+							<a id = "f4" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
+								Command
+							</a>
+							<ul class="dropdown-menu f4" aria-labelledby="f4" role="menu">
+								<li><a href = "#">1:Abort</a></li>
+								<li><a href = "#">2:Login</a></li>
+								<li><a href = "#">3:Logout</a></li>
+								<li><a href = "#">4:Scan NCS</a></li>
+								<li><a href = "#">5:Select NCS</a></li>
+								<li><a href = "#">6:Stop Alarm</a></li>
+							</ul>
+						</li>
+						<li class = "dropdown">
+							<a id = "f5" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
+								System
+							</a>
+							<ul class="dropdown-menu f5" aria-labelledby="f5" role="menu">
+								<li><a href = "#">1:System Setup</a></li>
+								<li><a href = "#">2:EGC Setup</a></li>
+								<li><a href = "#">3:NCS Channel List</a></li>
+								<li><a href = "#">4:EGC Channel List</a></li>
+								<li><a href = "#">5:LES List</a></li>
+								<li><a href = "#">6:Station List</a></li>
+								<li><a href = "#">7:Ship Position</a></li>
+							</ul>
+						</li>
+						<li class = "dropdown">
+							<a id = "f6" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
+								Term
+							</a>
+							<ul class="dropdown-menu f6" aria-labelledby="f6" role="menu">
+								<li><a href = "#">1:Auto Log Print</a></li>
+								<li><a href = "#">2:Recieve Alarm</a></li>
+								<li><a href = "#">3:Auto Telex MSG Save</a></li>
+								<li><a href = "#">4:Auto EGC MSG Save</a></li>
+								<li><a href = "#">5:DTE Type</a></li>
+								<li><a href = "#">6:MSG Directory</a></li>
+							</ul>
+						</li>
+						<li class = "dropdown">
+							<a id = "f7" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
+								Editor
+							</a>
+						</li>
+						<li class = "dropdown">
+							<a id = "f8" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
+								Disp
+							</a>
+							<ul class="dropdown-menu f8" aria-labelledby="f8" role="menu">
+								<li><a href = "#">1:System Status Monitor</a></li>
+								<li><a href = "#">2:Network Configuration</a></li>
+								<li><a href = "#">3:PV Test Results</a></li>
+							</ul>
+						</li>
+						<li class = "dropdown">
+							<a id = "f9" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
+								Test
+							</a>
+							<ul class="dropdown-menu f9" aria-labelledby="f9" role="menu">
+								<li><a href = "#">1:PV Test</a></li>
+								<li><a href = "#">2:Self Tests</a></li>
+							</ul>
+						</li>
+						<li class = "dropdown">
+							<a id = "f10" class = "dropdown-toggle" data-toggle = "dropdown" href="#">
+								Distress
+							</a>
+							<ul class="dropdown-menu f10" aria-labelledby="f10" role="menu">
+								<li><a href = "#">1:Activate Distress Alert</a></li>
+								<li><a href = "#">2:Update Distress Alert</a></li>
+								<li><a href = "#">3:Activate Distress Alert Test</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div id = "workarea">
+				</div>
+				<div id = "status">
+					<table>
+						<tr>
+							<td>Current state: <span class = "state">IDLE</span></td>
+							<td><span class = "sync">Unsync</span></td>
+							<td><span class = "date">03-01-19 12:24(UTC)</span></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>NCS: <span class = "ncs">AOR.E LOGOUT</span></td>
+							<td>LAT: <span class = "lat"></span></td>
+						</tr>
+						<tr>
+							<td><span class = "version">DCE Ver. 25 Jan-2003</span></td>
+							<td></td>
+							<td>LON: <span class = "lon"></span></td>
+						</tr>
+					</table>
 				</div>
 			</div>
-		</header>
+		</div>
 
 		<!--[if lt IE 9]>
 		<script src="///js/html5.js"></script>
@@ -151,6 +171,7 @@
 		<script type="text/javascript" src="js/jquery.min.js"> </script>
 		<script type="text/javascript" src="js/jquery.hotkeys.js"> </script>
 		<script type="text/javascript" src="js/bootstrap.min.js"> </script>
+		<script type="text/javascript" src="js/date.js"> </script>
 		<script type="text/javascript" src="js/main.js"> </script>
 	</body>
 </html>
