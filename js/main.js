@@ -37,12 +37,12 @@ jQuery(document).ready(function($) {
 			var self = this;
 			//set datetime counter
 			self.time($('#status span.date'));
-			setInterval(function(){self.time($('#status span.date'))}, 1000);
+			setInterval(function(){self.time($('#status span.date'))}, 10);
 		},
 		time : function(el) {
 			var date = new Date();
 			$(el).html(
-				date.toString("yy-MM-dd HH:mm:ss" + ' (UTC)')
+				date.toString("yy-MM-dd HH:mm" + ' (UTC)')
 			);
 		}
 	};
