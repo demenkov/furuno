@@ -33,19 +33,20 @@ jQuery(document).ready(function($) {
 	var felcom = {
 		lat		:0,
 		lon		:0,
-		date	:new Date(),
 		init	: function() {
 			var self = this;
 			//set datetime counter
-			felcom.time($('#status span.date'));
+			self.time($('#status span.date'));
 			setInterval(function(){self.time($('#status span.date'))}, 1000);
 		},
-		time	: function(el) {
+		time : function(el) {
+			var date = new Date();
 			$(el).html(
-				this.date.toString("yy-mm-dd HH:mm" + ' (UTC)')
+				date.toString("yy-MM-dd HH:mm:ss" + ' (UTC)')
 			);
 		}
 	};
 
 	felcom.init();
+
 });
