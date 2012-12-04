@@ -140,6 +140,10 @@ h3.logo {
 	max-height	:450px;
 }
 
+#workarea * {
+	background:#000000;
+}
+
 #status {
 	border-top: 1px dashed #FFFFFF;
 }
@@ -152,3 +156,32 @@ h3.logo {
 	width: 33%;
 }
 
+.modal {
+	left		: 50px;
+	margin		: 0;
+	outline		: 1px solid #fff;
+	position	: relative;
+	top			: 0;
+}
+
+.modal-header .close {
+	color	: #FFFFFF;
+	opacity	: 1;
+}
+
+.modal-header {
+	border:none;
+	padding:0;
+}
+
+.modal-body {
+	padding:0;
+}
+
+.modal-footer {
+	border-radius	: 0;
+	border-top		: 0;
+	box-shadow		: none;
+	margin-bottom	: 0;
+	padding			: 0;
+}

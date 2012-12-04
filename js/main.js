@@ -31,19 +31,64 @@ jQuery(document).ready(function($) {
 	}
 
 	var felcom = {
-		lat		:0,
-		lon		:0,
+		lat		: null,
+		lon		: null,
 		init	: function() {
 			var self = this;
 			//set datetime counter
-			self.time($('#status span.date'));
-			setInterval(function(){self.time($('#status span.date'))}, 10);
+			self.time();
+			setInterval(function(){self.time()}, 10);
+			//set latitude and longitude
+			ymaps.ready(function () {
+				self.lat = ymaps.geolocation ? ymaps.geolocation.latitude : null;
+				self.lon = ymaps.geolocation ? ymaps.geolocation.longitude : null;
+				self.coordinates();
+			});
 		},
-		time : function(el) {
+		time : function() {
 			var date = new Date();
-			$(el).html(
+			$('#status span.date').html(
 				date.toString("yy-MM-dd HH:mm" + ' (UTC)')
 			);
+		},
+		coordinates : function() {
+			if (this.lat) {
+				var time = this.convertDegToTime(this.lat);
+				var letter = (this.lat > 0) ? 'W' : 'E';
+				$('#status span.lat').html(time.h + ':' + time.m + ':' + time.s + letter);
+			}
+			if (this.lon) {
+				var time = this.convertDegToTime(this.lon);
+				var letter = (this.lat > 0) ? 'N' : 'S';
+				$('#status span.lon').html(time.h + ':' + time.m + ':' + time.s + letter);
+			}
+		},
+		convertDegToTime : function(deg) {
+			var degrees     = 0;
+			var degreesTemp = 0.0;
+			var minutes     = 0;
+			var minutesTemp = 0.0;
+			var seconds     = 0;
+			var secondsTemp = 0.0;
+			var isNegativeAngle;
+
+			degrees     = Math.floor(deg);
+
+			minutesTemp = deg - degrees;
+			minutesTemp = 60.0 * minutesTemp;
+			minutes     = Math.floor(minutesTemp);
+
+			secondsTemp = minutesTemp - minutes;
+			secondsTemp = 60.0 * secondsTemp;
+			seconds     = Math.round(secondsTemp);
+
+			seconds = (seconds.toString().length > 1) ? seconds : '0' + seconds;
+
+			return {
+				h:degrees,
+				m:minutes,
+				s:seconds
+			};
 		}
 	};
 
