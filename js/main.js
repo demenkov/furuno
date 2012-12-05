@@ -1,16 +1,32 @@
 //main function
 jQuery(document).ready(function($) {
+
 	//add events for functional buttons
-	$(document).bind('keydown', 'f1', function (evt) { $('#f1').dropdown('toggle'); return false;});
-	$(document).bind('keydown', 'f2', function (evt) { $('#f2').dropdown('toggle'); return false;});
-	$(document).bind('keydown', 'f3', function (evt) { $('#f3').dropdown('toggle'); return false;});
-	$(document).bind('keydown', 'f4', function (evt) { $('#f4').dropdown('toggle'); return false;});
-	$(document).bind('keydown', 'f5', function (evt) { $('#f5').dropdown('toggle'); return false;});
-	$(document).bind('keydown', 'f6', function (evt) { $('#f6').dropdown('toggle'); return false;});
-	$(document).bind('keydown', 'f7', function (evt) { $('#f7').dropdown('toggle'); return false;});
-	$(document).bind('keydown', 'f8', function (evt) { $('#f8').dropdown('toggle'); return false;});
-	$(document).bind('keydown', 'f9', function (evt) { $('#f9').dropdown('toggle'); return false;});
-	$(document).bind('keydown', 'f10', function (evt) { $('#f10').dropdown('toggle'); return false;});
+	$(document).bind('keydown', 'f1', fnPressed);
+	$(document).bind('keydown', 'f2', fnPressed);
+	$(document).bind('keydown', 'f3', fnPressed);
+	$(document).bind('keydown', 'f4', fnPressed);
+	$(document).bind('keydown', 'f5', fnPressed);
+	$(document).bind('keydown', 'f6', fnPressed);
+	$(document).bind('keydown', 'f7', fnPressed);
+	$(document).bind('keydown', 'f8', fnPressed);
+	$(document).bind('keydown', 'f9', fnPressed);
+	$(document).bind('keydown', 'f10', fnPressed);
+
+	function fnPressed(e) {
+		//hash of possible fn's
+		var fnKeys = {112: "f1", 113: "f2", 114: "f3", 115: "f4", 116: "f5", 117: "f6", 118: "f7", 119: "f8",
+			120: "f9", 121: "f10", 122: "f11", 123: "f12"};
+		$('#' + fnKeys[e.which]).click();
+		return false;
+	}
+	//close all modal windows when pressed functional button
+	$('.dropdown-toggle').on('click', function(){
+		$('.modal').modal('hide');
+	});
+	//close all modal windows when pressed enter
+	$(document).bind('keydown', 'return', function(e){ $('.modal').modal('hide'); return false;});
+
 	//add events for numeric buttons
 	$(document).bind('keydown', '1', numberPressed);
 	$(document).bind('keydown', '2', numberPressed);
@@ -26,7 +42,7 @@ jQuery(document).ready(function($) {
 	//process numeric buttons
 	function numberPressed(e) {
 		//if opened menu and itrem with this index exisis focus on it
-		$($('#menu li.dropdown.open ul li a')[String.fromCharCode( e.which ).toLowerCase() - 1]).focus();
+		$($('#menu li.dropdown.open ul li a')[String.fromCharCode( e.which ).toLowerCase() - 1]).click();
 		return false;
 	}
 
