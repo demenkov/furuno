@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
 		var felcom = {
 		lat		: null,
 		lon		: null,
-		ncs		: 'Auto',
+		ncs		: 'AOR(EAST)',
 		init	: function() {
 			var self = this;
 			//set datetime counter
@@ -123,7 +123,14 @@ jQuery(document).ready(function($) {
 		$('.modal').modal('hide');
 	});
 	//close all modal windows when pressed enter
-	$(document).bind('keydown', 'return', function(e){ $('.modal').modal('hide');});
+	$(document).bind('keydown', 'return', function(e){
+		$('.modal').modal('hide');
+		$('.modal').children('.modal-body').find('.btn-group').each(function(){
+			if ($(this).attr('felcom-key')) {
+				felcom[$(this).attr('felcom-key')] = $(this).find('.active span.text').html();
+			}
+		});
+	});
 
 	//process left and right buttons
 	function leftRightPressed(e) {
@@ -165,13 +172,8 @@ jQuery(document).ready(function($) {
 		$(this).children('.modal-body').find('table tr:first').addClass('active');
 	});
 
-	$('.modal').on('hide', function () {
+	$('.modal').on('hide', function (e) {
 		$(this).children('.modal-body').find('table tr').removeClass('active');
-		$(this).children('.modal-body').find('.btn-group').each(function(){
-			if ($(this).attr('felcom-key')) {
-				felcom[$(this).attr('felcom-key')] = $(this).find('.active span.text').html();
-			}
-		});
 	});
 
 	felcom.init();
