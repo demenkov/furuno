@@ -142,49 +142,136 @@
 				</div>
 				<div id = "workarea">
 					<div id = "system-setup" class = "modal hide" tabindex="-1" role = "dialog" aria-labelledby="SystemSetup" aria-hidden = "true" data-backdrop = "">
-						<div class = "header">System Setup</div>
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						</div>
+						<div class="modal-header">System Setup</div>
 						<div class="modal-body">
 							<table>
 								<tr>
 									<td><a href = "#">System Date (UTC)</a></td>
-									<td>John Don</td>
+									<td>
+										John Don
+									</td>
 								</tr>
 								<tr class = "dotted">
 									<td><a href = "#">Preffered NCS</a></td>
-									<td>John Don</td>
+									<td>
+										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "ncs">
+											<button type="button" class="btn active">
+												<span class = "text">Auto</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">AOR(WEST)</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">AOR(EAST)</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">POR</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">IOR</span>
+											</button>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td>MES Operation Mode</td>
-									<td>John Don</td>
+									<td><a href = "#">MES Operation Mode</a></td>
+									<td>
+										<div class="btn-group" data-toggle="buttons-radio">
+											<button type="button" class="btn active">
+												<span class = "text">INMASARAT-C</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">EGC</span>
+											</button>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td>Nav Port</td>
-									<td>John Don</td>
+									<td><a href = "#">Nav Port</a></td>
+									<td>
+										<div class="btn-group" data-toggle="buttons-radio">
+											<button type="button" class="btn active">
+												<span class = "text">INT</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">EXT</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">OFF</span>
+											</button>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td>DTE2 Port Sub-addr.</td>
-									<td>John Don</td>
+									<td><a href = "#">DTE2 Port Sub-addr.</a></td>
+									<td>
+										John Don
+									</td>
 								</tr>
 								<tr>
-									<td>Message Output Port</td>
-									<td>John Don</td>
+									<td><a href = "#">Message Output Port</a></td>
+									<td>
+										<div class="btn-group" data-toggle="buttons-radio">
+											<button type="button" class="btn active">
+												<span class = "text">DTE1</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">DTE2</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">Auto (Depend on Sub Addr)</span>
+											</button>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td>EGC Output Port</td>
-									<td>John Don</td>
+									<td><a href = "#">EGC Output Port</a></td>
+									<td>
+										<div class="btn-group" data-toggle="buttons-radio">
+											<button type="button" class="btn active">
+												<span class = "text">DTE1</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">DTE2</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">DTE1+DTE2 Port</span>
+											</button>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td>Polling Output Port</td>
-									<td>John Don</td>
+									<td><a href = "#">Polling Output Port</a></td>
+									<td>
+										<div class="btn-group" data-toggle="buttons-radio">
+											<button type="button" class="btn active">
+												<span class = "text">DTE1</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">DTE2</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text">Auto (Depend on Sub Addr)</span>
+											</button>
+										</div>
+									</td>
 								</tr>
 							</table>
 						</div>
 						<div class="modal-footer">
-							<a href="#" class="btn">Close</a>
-							<a href="#" class="btn btn-primary">Save changes</a>
 						</div>
 					</div>
 				</div>
@@ -197,7 +284,7 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td>NCS: <span class = "ncs">AOR.E LOGOUT</span></td>
+							<td>NCS: <span class = "ncs">AOR.E</span> LOGOUT</td>
 							<td>LAT: <span class = "lat"></span></td>
 						</tr>
 						<tr>

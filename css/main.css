@@ -31,17 +31,19 @@ h3.logo {
 	margin-left: -130px;
 }
 
-#menu .nav > li > a,
+a,
 .dropdown-menu li > a {
-	color		: #FFFFFF;
-	text-shadow	: none;
+	color				: #FFFFFF;
+	background-color	: #000000;
+	text-shadow			: none;
 }
 
 #menu .nav li > a > span {
 	float:right;
-	margin-top:-1.5em;
 }
 
+a:hover,
+a:focus,
 #menu .nav > li > a:hover,
 .dropdown-menu li > a:hover,
 #menu .nav > li > a:focus,
@@ -51,6 +53,7 @@ h3.logo {
 #menu .nav li.dropdown.open.active > .dropdown-toggle {
 	background-color	: #FFFFFF;
 	color				: #000;
+	text-decoration		: none;
 }
 
 #menu .nav > li > a {
@@ -141,7 +144,7 @@ h3.logo {
 	max-height	:450px;
 }
 
-#workarea * {
+#workarea > * {
 	background:#000000;
 }
 
@@ -165,21 +168,17 @@ h3.logo {
 	top			: 0;
 }
 
-.modal .header {
-	position	: fixed;
-	margin-top	:-20px;
+.modal-header {
+	margin-top	:-12px;
 	margin-left	: 230px;
 	padding		: 0 5px;
-}
-
-.modal-header .close {
-	color	: #FFFFFF;
-	opacity	: 1;
+	z-index:2000;
 }
 
 .modal-header {
 	border		: none;
 	padding		: 0;
+	background-color: #000000;
 }
 
 .modal-body {
@@ -201,4 +200,41 @@ tr.dotted {
 	box-shadow		: none;
 	margin-bottom	: 0;
 	padding			: 0;
+}
+
+button.btn,
+button.btn:hover,
+button.btn:focus,
+button.btn.active,
+button.btn.active:hover,
+button.btn.active:focus {
+	color				: #FFFFFF;
+	text-shadow			: none;
+	background-color	: #000000;
+}
+
+button.btn.active span.text {
+	text-decoration	: underline;
+}
+
+button.btn.active span.delimiter {
+	text-decoration	: none;
+}
+button.btn {
+	background		: none;
+	box-shadow		: none;
+}
+
+.btn {
+	padding: 4px 2px;
+}
+
+tr.active .btn-group button.btn.active span.text {
+	color				:#000000;
+	background-color	:#FFFFFF;
+}
+
+tr.active a {
+	color				:#000000;
+	background-color	:#FFFFFF;
 }
