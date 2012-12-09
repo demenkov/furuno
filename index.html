@@ -156,23 +156,23 @@
 									<td>
 										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "ncs">
 											<button type="button" class="btn active">
-												<span class = "text">Auto</span>
+												<span class = "text" felcom-val = "Auto">Auto</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">AOR(WEST)</span>
+												<span class = "text" felcom-val = "AOR.W">AOR(WEST)</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">AOR(EAST)</span>
+												<span class = "text" felcom-val = "AOR.E">AOR(EAST)</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">POR</span>
+												<span class = "text" felcom-val = "POR">POR</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">IOR</span>
+												<span class = "text" felcom-val = "IOR">IOR</span>
 											</button>
 										</div>
 									</td>
@@ -180,13 +180,13 @@
 								<tr>
 									<td><a href = "#">MES Operation Mode</a></td>
 									<td>
-										<div class="btn-group" data-toggle="buttons-radio">
+										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "mes">
 											<button type="button" class="btn active">
-												<span class = "text">INMASARAT-C</span>
+												<span class = "text" felcom-val = "INMASARAT-C">INMASARAT-C</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">EGC</span>
+												<span class = "text" felcom-val = "EGC">EGC</span>
 											</button>
 										</div>
 									</td>
@@ -194,17 +194,17 @@
 								<tr>
 									<td><a href = "#">Nav Port</a></td>
 									<td>
-										<div class="btn-group" data-toggle="buttons-radio">
+										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "nav-port">
 											<button type="button" class="btn active">
-												<span class = "text">INT</span>
+												<span class = "text" felcom-val = "INT">INT</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">EXT</span>
+												<span class = "text" felcom-val = "EXT">EXT</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">OFF</span>
+												<span class = "text" felcom-val = "OFF">OFF</span>
 											</button>
 										</div>
 									</td>
@@ -218,17 +218,17 @@
 								<tr>
 									<td><a href = "#">Message Output Port</a></td>
 									<td>
-										<div class="btn-group" data-toggle="buttons-radio">
+										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "msg-port">
 											<button type="button" class="btn active">
-												<span class = "text">DTE1</span>
+												<span class = "text" felcom-val = "DTE1">DTE1</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">DTE2</span>
+												<span class = "text" felcom-val = "DTE2">DTE2</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">Auto (Depend on Sub Addr)</span>
+												<span class = "text" felcom-val = "Auto">Auto (Depend on Sub Addr)</span>
 											</button>
 										</div>
 									</td>
@@ -236,17 +236,17 @@
 								<tr>
 									<td><a href = "#">EGC Output Port</a></td>
 									<td>
-										<div class="btn-group" data-toggle="buttons-radio">
+										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "egc-port">
 											<button type="button" class="btn active">
-												<span class = "text">DTE1</span>
+												<span class = "text" felcom-val = "DTE1">DTE1</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">DTE2</span>
+												<span class = "text" felcom-val = "DTE2">DTE2</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">DTE1+DTE2 Port</span>
+												<span class = "text" felcom-val = "DTE1+DTE2">DTE1+DTE2 Port</span>
 											</button>
 										</div>
 									</td>
@@ -254,24 +254,22 @@
 								<tr>
 									<td><a href = "#">Polling Output Port</a></td>
 									<td>
-										<div class="btn-group" data-toggle="buttons-radio">
+										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "poll-port">
 											<button type="button" class="btn active">
-												<span class = "text">DTE1</span>
+												<span class = "text" felcom-val = "DTE1">DTE1</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">DTE2</span>
+												<span class = "text" felcom-val = "DTE1">DTE2</span>
 												<span class = "delimiter">/</span>
 											</button>
 											<button type="button" class="btn">
-												<span class = "text">Auto (Depend on Sub Addr)</span>
+												<span class = "text" felcom-val = "Auto">Auto (Depend on Sub Addr)</span>
 											</button>
 										</div>
 									</td>
 								</tr>
 							</table>
-						</div>
-						<div class="modal-footer">
 						</div>
 					</div>
 				</div>
@@ -284,7 +282,7 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td>NCS: <span class = "ncs">AOR(EAST)</span> LOGOUT</td>
+							<td>NCS: <span class = "ncs">AOR.E</span> LOGOUT</td>
 							<td>LAT: <span class = "lat"></span></td>
 						</tr>
 						<tr>

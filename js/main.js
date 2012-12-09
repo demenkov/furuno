@@ -4,7 +4,6 @@ jQuery(document).ready(function($) {
 		var felcom = {
 		lat		: null,
 		lon		: null,
-		ncs		: 'AOR(EAST)',
 		init	: function() {
 			var self = this;
 			//set datetime counter
@@ -125,9 +124,10 @@ jQuery(document).ready(function($) {
 	//close all modal windows when pressed enter
 	$(document).bind('keydown', 'return', function(e){
 		$('.modal').modal('hide');
+		//change current station settings
 		$('.modal').children('.modal-body').find('.btn-group').each(function(){
 			if ($(this).attr('felcom-key')) {
-				felcom[$(this).attr('felcom-key')] = $(this).find('.active span.text').html();
+				felcom[$(this).attr('felcom-key')] = $(this).find('.active span.text').attr('felcom-val');
 			}
 		});
 	});
@@ -154,11 +154,11 @@ jQuery(document).ready(function($) {
 		var index = list.index(current);
 		if (e.keyCode == 40 && index < list.length-1) {
 			list.removeClass('active');
-			$(list[index+1]).addClass('active');
+			$(list[index+1]).addClass('active').find('td:first a').focus();
 		}
 		if (e.keyCode == 38 && index > 0) {
 			list.removeClass('active');
-			$(list[index-1]).addClass('active');
+			$(list[index-1]).addClass('active').find('td:first a').focus();
 		}
 		return false;
 	}
@@ -170,6 +170,18 @@ jQuery(document).ready(function($) {
 
 	$('.modal').on('show', function () {
 		$(this).children('.modal-body').find('table tr:first').addClass('active');
+		//set default station settings if it's isn't set
+		$(this).children('.modal-body').find('.btn-group').each(function(){
+			if ($(this).attr('felcom-key')) {
+				if (!felcom[$(this).attr('felcom-key')]) {
+					felcom[$(this).attr('felcom-key')] = $(this).find('.active span.text').attr('felcom-val');
+				}
+				else {
+					$(this).find('.active').removeClass('active');
+					$(this).find('[felcom-val="' + felcom[$(this).attr('felcom-key')] + '"]').parent().addClass('active');
+				}
+			}
+		});
 	});
 
 	$('.modal').on('hide', function (e) {
