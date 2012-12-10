@@ -147,8 +147,9 @@ jQuery(document).ready(function($) {
 		return false;
 	}
 
-	//process left and right buttons
+	//process up and down buttons
 	function upDownPressed(e) {
+		console.log('ff')
 		var list = $('.modal:visible .modal-body tr');
 		var current = $('.modal:visible .modal-body tr.active');
 		var index = list.index(current);
@@ -163,9 +164,9 @@ jQuery(document).ready(function($) {
 		return false;
 	}
 
-	$('.modal-body a').add('.modal-body button').on('click', function(){
+	$('.modal-body td').on('click', function(){
 		$(this).parents('tr').siblings('tr').removeClass('active');
-		$(this).parents('tr').addClass('active');
+		$(this).parents('tr').addClass('active').find('input:first').focus();
 	});
 
 	$('.modal').on('show', function () {

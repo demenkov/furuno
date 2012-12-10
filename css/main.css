@@ -233,6 +233,11 @@ tr.active a {
 	background-color	:#FFFFFF;
 }
 
+tr.active span.active {
+	color		: #000000;
+	background	: #FFFFFF;
+}
+
 @-moz-document url-prefix() {
 	#menu .nav li > a > span {
     	margin-top: -1.5em;
