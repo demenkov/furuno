@@ -4,6 +4,7 @@ jQuery(document).ready(function($) {
 		var felcom = {
 		lat		: null,
 		lon		: null,
+		date	: new Date(),
 		init	: function() {
 			var self = this;
 			//set datetime counter
@@ -15,11 +16,16 @@ jQuery(document).ready(function($) {
 				self.lon = ymaps.geolocation ? ymaps.geolocation.longitude : null;
 				self.coordinates();
 			});
+			$('#date span').each(function(i){
+				var num = ['yy','MM','dd'];
+				var d = self.date.toString(num[((i%2) > 0) ? Math.floor((i-1)/2) : i/2]);
+				$(this).html(d[i%2]);
+			});
 		},
 		update : function() {
-			var date = new Date();
+			var self = this;
 			$('#status span.date').html(
-				date.toString("yy-MM-dd HH:mm" + ' (UTC)')
+				this.date.toString("yy-MM-dd HH:mm" + ' (UTC)')
 			);
 			$('#status span.ncs').html(
 				this.ncs
@@ -101,6 +107,19 @@ jQuery(document).ready(function($) {
 	function numberPressed(e) {
 		//if opened menu and itrem with this index exisis focus on it
 		$($('#menu li.dropdown.open ul li a')[String.fromCharCode( e.which ).toLowerCase() - 1]).click();
+		//if its inpit emulate change number and go to next
+		if($('.modal-body tr.active span.active').length) {
+			var spans = $('.modal-body tr.active span'),
+				current = $('.modal-body tr.active span.active');
+			$(current).html(String.fromCharCode( e.which ).toLowerCase()).removeClass('active');
+			if (spans.length-1 == $(spans).index(current)) {
+				$($(spans)[0]).addClass('active');
+			}
+			else {
+				$(current).next('span').addClass('active');
+			}
+
+		}
 		return false;
 	}
 
@@ -144,12 +163,23 @@ jQuery(document).ready(function($) {
 		if (e.keyCode == 37 && list[index-1]) {
 			list[index-1].click();
 		}
+		//if its inpit emulate
+		var list = $('.modal-body tr.active span'),
+			current = $('.modal-body tr.active span.active');
+			index = list.index(current);
+		if (e.keyCode == 39 && list[index+1]) {
+			list.removeClass('active');
+			$(list[index+1]).addClass('active');
+		}
+		if (e.keyCode == 37 && list[index-1]) {
+			list.removeClass('active');
+			$(list[index-1]).addClass('active');
+		}
 		return false;
 	}
 
 	//process up and down buttons
 	function upDownPressed(e) {
-		console.log('ff')
 		var list = $('.modal:visible .modal-body tr');
 		var current = $('.modal:visible .modal-body tr.active');
 		var index = list.index(current);
