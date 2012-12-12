@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 
 		var felcom = {
 		lat		: '54:43:12',
-		lon		: '20:30:07',
+		lon		: '020:30:07',
 		date	: new Date(),
 		dte2port: '001',
 		init	: function() {
@@ -20,15 +20,13 @@ jQuery(document).ready(function($) {
 			$('#dte2-port span').each(function(i){
 				$(this).html(self.dte2port[i]);
 			});
-			var lat = this.lat.split(':');
+			var lat = this.lat.replace (/:/g, "");
 			$('#lat span').each(function(i){
-				var digit = lat[((i%2) > 0) ? Math.floor((i-1)/2) : i/2];
-				$(this).html(digit[i%2]);
+				$(this).html(lat[i]);
 			});
-			var lon = this.lon.split(':');
+			var lon = this.lon.replace (/:/g, "");
 			$('#lon span').each(function(i){
-				var digit = lon[((i%2) > 0) ? Math.floor((i-1)/2) : i/2];
-				$(this).html(digit[i%2]);
+				$(this).html(lon[i]);
 			});
 		},
 		update : function() {
@@ -155,11 +153,12 @@ jQuery(document).ready(function($) {
 		}
 		//change longitude
 		var lon = $($('.modal:visible .modal-body #lon span')[0]).html() +
-			$($('.modal:visible .modal-body #lon span')[1]).html() + ':' +
-			$($('.modal:visible .modal-body #lon span')[2]).html() +
-			$($('.modal:visible .modal-body #lon span')[3]).html() + ':' +
-			$($('.modal:visible .modal-body #lon span')[4]).html() +
-			$($('.modal:visible .modal-body #lon span')[5]).html();
+			$($('.modal:visible .modal-body #lon span')[1]).html() +
+			$($('.modal:visible .modal-body #lon span')[2]).html() + ':' +
+			$($('.modal:visible .modal-body #lon span')[3]).html() +
+			$($('.modal:visible .modal-body #lon span')[4]).html() + ':' +
+			$($('.modal:visible .modal-body #lon span')[5]).html() +
+			$($('.modal:visible .modal-body #lon span')[6]).html()
 		if (lon) {
 			felcom.lon = lon;
 		}
