@@ -88,7 +88,7 @@
 								<li><a href = "#">4:EGC Channel List</a></li>
 								<li><a href = "#">5:LES List</a></li>
 								<li><a href = "#">6:Station List</a></li>
-								<li><a href = "#">7:Ship Position</a></li>
+								<li><a href = "#ship-position" data-toggle="modal">7:Ship Position</a></li>
 							</ul>
 						</li>
 						<li class = "dropdown">
@@ -276,6 +276,29 @@
 							</table>
 						</div>
 					</div>
+					<div id = "ship-position" class = "modal hide" tabindex="-1" role = "dialog" aria-labelledby="SystemSetup" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-header">Ship position</div>
+						<div class="modal-body">
+							<table>
+								<tr>
+									<td><a href = "#">Latitude</a></td>
+									<td>
+										<div id = "lat">
+											<span class = "active">5</span><span>4</span>:<span>4</span><span>3</span>:<span>1</span><span>2</span>
+										</div>
+									</td>
+									<tr>
+									<td><a href = "#">Longitude</a></td>
+									<td>
+										<div id = "lon">
+											<span class = "active">2</span><span>0</span>:<span>3</span><span>0</span>:<span>0</span><span>7</span>
+										</div>
+									</td>
+								</tr>
+								</tr>
+							</table>
+						</div>
+					</div>
 				</div>
 				<div id = "status">
 					<table>
@@ -287,12 +310,12 @@
 						<tr>
 							<td></td>
 							<td>NCS: <span class = "ncs">AOR.E</span> LOGOUT</td>
-							<td>LAT: <span class = "lat"></span></td>
+							<td>LAT: <span class = "lat">54:43:12W</span></td>
 						</tr>
 						<tr>
 							<td><span class = "version">DCE Ver. 25 Jan-2003</span></td>
 							<td></td>
-							<td>LON: <span class = "lon"></span></td>
+							<td>LON: <span class = "lon">20:30:07N</span></td>
 						</tr>
 					</table>
 				</div>
@@ -302,7 +325,6 @@
 		<!--[if lt IE 9]>
 		<script src="///js/html5.js"></script>
 		<![endif]-->
-		<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"> </script>
 		<script type="text/javascript" src="js/jquery.min.js"> </script>
 		<script type="text/javascript" src="js/jquery.hotkeys.js"> </script>
 		<script type="text/javascript" src="js/bootstrap.min.js"> </script>

@@ -2,8 +2,8 @@
 jQuery(document).ready(function($) {
 
 		var felcom = {
-		lat		: null,
-		lon		: null,
+		lat		: '54:43:12',
+		lon		: '20:30:07',
 		date	: new Date(),
 		dte2port: '001',
 		init	: function() {
@@ -11,19 +11,24 @@ jQuery(document).ready(function($) {
 			//set datetime counter
 			self.update();
 			setInterval(function(){self.update()}, 10);
-			//set latitude and longitude
-			ymaps.ready(function () {
-				self.lat = ymaps.geolocation ? ymaps.geolocation.latitude : null;
-				self.lon = ymaps.geolocation ? ymaps.geolocation.longitude : null;
-				self.coordinates();
-			});
+
+			var num = ['yy','MM','dd'];
 			$('#date span').each(function(i){
-				var num = ['yy','MM','dd'];
 				var d = self.date.toString(num[((i%2) > 0) ? Math.floor((i-1)/2) : i/2]);
 				$(this).html(d[i%2]);
 			});
 			$('#dte2-port span').each(function(i){
 				$(this).html(self.dte2port[i]);
+			});
+			var lat = this.lat.split(':');
+			$('#lat span').each(function(i){
+				var digit = lat[((i%2) > 0) ? Math.floor((i-1)/2) : i/2];
+				$(this).html(digit[i%2]);
+			});
+			var lon = this.lon.split(':');
+			$('#lon span').each(function(i){
+				var digit = lon[((i%2) > 0) ? Math.floor((i-1)/2) : i/2];
+				$(this).html(digit[i%2]);
 			});
 		},
 		update : function() {
@@ -34,45 +39,14 @@ jQuery(document).ready(function($) {
 			$('#status span.ncs').html(
 				this.ncs
 			);
-		},
-		coordinates : function() {
-			if (this.lat) {
-				var time = this.convertDegToTime(this.lat);
-				var letter = (this.lat > 0) ? 'W' : 'E';
-				$('#status span.lat').html(time.h + ':' + time.m + ':' + time.s + letter);
-			}
-			if (this.lon) {
-				var time = this.convertDegToTime(this.lon);
-				var letter = (this.lat > 0) ? 'N' : 'S';
-				$('#status span.lon').html(time.h + ':' + time.m + ':' + time.s + letter);
-			}
-		},
-		convertDegToTime : function(deg) {
-			var degrees     = 0;
-			var degreesTemp = 0.0;
-			var minutes     = 0;
-			var minutesTemp = 0.0;
-			var seconds     = 0;
-			var secondsTemp = 0.0;
-			var isNegativeAngle;
-
-			degrees     = Math.floor(deg);
-
-			minutesTemp = deg - degrees;
-			minutesTemp = 60.0 * minutesTemp;
-			minutes     = Math.floor(minutesTemp);
-
-			secondsTemp = minutesTemp - minutes;
-			secondsTemp = 60.0 * secondsTemp;
-			seconds     = Math.round(secondsTemp);
-
-			seconds = (seconds.toString().length > 1) ? seconds : '0' + seconds;
-
-			return {
-				h:degrees,
-				m:minutes,
-				s:seconds
-			};
+			var letter = (parseInt(this.lat) > 0) ? 'W' : 'E';
+			$('#status span.lat').html(
+				this.lat + letter
+			);
+			letter = (parseInt(this.lon) > 0) ? 'N' : 'S';
+			$('#status span.lon').html(
+				this.lon + letter
+			);
 		}
 	};
 
@@ -168,6 +142,26 @@ jQuery(document).ready(function($) {
 			$($('.modal:visible .modal-body #dte2-port span')[2]).html();
 		if (dte2port) {
 			felcom.dte2port = dte2port;
+		}
+		//change latitude
+		var lat = $($('.modal:visible .modal-body #lat span')[0]).html() +
+			$($('.modal:visible .modal-body #lat span')[1]).html() + ':' +
+			$($('.modal:visible .modal-body #lat span')[2]).html() +
+			$($('.modal:visible .modal-body #lat span')[3]).html() + ':' +
+			$($('.modal:visible .modal-body #lat span')[4]).html() +
+			$($('.modal:visible .modal-body #lat span')[5]).html();
+		if (lat) {
+			felcom.lat = lat;
+		}
+		//change longitude
+		var lon = $($('.modal:visible .modal-body #lon span')[0]).html() +
+			$($('.modal:visible .modal-body #lon span')[1]).html() + ':' +
+			$($('.modal:visible .modal-body #lon span')[2]).html() +
+			$($('.modal:visible .modal-body #lon span')[3]).html() + ':' +
+			$($('.modal:visible .modal-body #lon span')[4]).html() +
+			$($('.modal:visible .modal-body #lon span')[5]).html();
+		if (lon) {
+			felcom.lon = lon;
 		}
 		//close modal
 		$('.modal').modal('hide');
