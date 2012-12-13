@@ -243,3 +243,26 @@ tr.active span.active {
     	margin-top: -1.5em;
 	}
 }
+
+.text {
+	left	: 0;
+	width	: 100%
+	z-index	: -10000;
+	display	: none;
+}
+
+.text textarea {
+	background	: #000000;
+	color		: #FFFFFF;
+	width		: 97%;
+	border		: none;
+	height 		: 370px
+}
+
+.text textarea:focus {
+	box-shadow	: none;
+}
+
+.text .modal-header {
+	margin-left	:40%;
+}

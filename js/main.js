@@ -96,7 +96,6 @@ jQuery(document).ready(function($) {
 			else {
 				$(current).next('span').click();
 			}
-
 		}
 		return false;
 	}
@@ -236,4 +235,25 @@ jQuery(document).ready(function($) {
 
 	felcom.init();
 
+/*		    ____                  __
+ *		   /  _/___  ____  __  __/ /_
+ *		   / // __ \/ __ \/ / / / __/
+ *		 _/ // / / / /_/ / /_/ / /_
+ *		/___/_/ /_/ .___/\__,_/\__/
+ *		         /_/
+ */
+	$('#new-text').on('click', function(){
+		$('div.text:first').show();
+	});
+	//open next window
+	$(document).bind('keydown', 'Alt+v', function(){
+		if ($('div.text:visible').next().length) {
+			$('div.text:visible').hide().next().show();
+		}
+		else {
+			$('div.text:visible').hide()
+			$('div.text:first').show();
+		}
+		return false;
+	});
 });
