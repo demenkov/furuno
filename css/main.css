@@ -244,14 +244,18 @@ tr.active span.active {
 	}
 }
 
-.text {
+.message {
 	left	: 0;
 	width	: 100%
 	z-index	: -10000;
 	display	: none;
 }
 
-.text textarea {
+.message.active {
+	display	: block;
+}
+
+.message textarea {
 	background	: #000000;
 	color		: #FFFFFF;
 	width		: 97%;
@@ -259,10 +263,10 @@ tr.active span.active {
 	height 		: 370px
 }
 
-.text textarea:focus {
+.message textarea:focus {
 	box-shadow	: none;
 }
 
-.text .modal-header {
+.message .modal-header {
 	margin-left	:40%;
 }

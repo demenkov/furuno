@@ -6,6 +6,7 @@ jQuery(document).ready(function($) {
 		lon		: '020:30:07',
 		date	: new Date(),
 		dte2port: '001',
+		disk	: false,
 		init	: function() {
 			var self = this;
 			//set datetime counter
@@ -243,16 +244,27 @@ jQuery(document).ready(function($) {
  *		         /_/
  */
 	$('#new-text').on('click', function(){
-		$('div.text:first').show();
+		$('#workarea .message.active').toggleClass('active');
+		var num = $('#workarea .message').not('.disk').length + 1;
+		$('#workarea').append('<div class = "message" tabindex="-1"><div class="modal-header">&lt;UNTITLED:' + num + '&gt;</div><div class="modal-body"><textarea></textarea></div></div>').show();
+		$('#workarea .message').not('.disk').last().toggleClass('active');
 	});
 	//open next window
 	$(document).bind('keydown', 'Alt+v', function(){
-		if ($('div.text:visible').next().length) {
-			$('div.text:visible').hide().next().show();
+		var messages = $('div.message');
+		if (!felcom.disk) {
+			messages = messages.not('.disk');
 		}
-		else {
-			$('div.text:visible').hide()
-			$('div.text:first').show();
+		if (messages.length > 1) {
+			var visible = messages.filter('.active');
+				index = messages.index(visible);
+			visible.toggleClass('active')
+			if (messages.length-1 == index) {
+				$(messages[0]).toggleClass('active');
+			}
+			else {
+				$(messages[index+1]).toggleClass('active');
+			}
 		}
 		return false;
 	});
