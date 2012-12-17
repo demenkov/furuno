@@ -120,7 +120,7 @@ a:focus,
 	height				: 600px;
 	min-width			: 800px;
 	width				: 800px;
-	border				: 40px solid gray;
+	border				: 40px solid #505050;
 	border-radius		: 10px;
 	background-color	: #000000;
 	color				: #FFFFFF;
@@ -131,6 +131,7 @@ a:focus,
 	border		: 1px solid white;
 	min-height	: 600px;
 	max-height	: 600px;
+	visibility	: hidden;
 }
 
 .f2 {
@@ -269,4 +270,65 @@ tr.active span.active {
 
 .message .modal-header {
 	margin-left	:40%;
+}
+
+#monitor-button, #floppy .button {
+	margin-top			: 10px;
+	min-height			: 15px;
+	height				: 15px;
+	min-width			: 15px;
+	width				: 15px;
+	background-color	: #960018;
+	cursor				: pointer;
+	border: 1px solid #00ffff;
+	border-radius		: 4px;
+}
+
+#monitor-button.enabled, #floppy .button.enabled {
+	background-color	: #c41e3a;
+}
+
+#floppy {
+	min-height			: 70px;
+	height				: 70px;
+	border				: 40px solid #505050;
+	background-color	: #505050;
+	min-width			: 800px;
+	width				: 800px;
+	border-radius		: 10px;
+	margin-top			:5px;
+}
+
+#floppy .slot-up, #floppy .slot-down {
+	min-height			: 30px;
+	height				: 30px;
+	background-color	: #000000;
+	width				: 250px;
+	border				: 1px solid #99958c;
+}
+
+#floppy .control {
+	width				: 250px;
+	margin-top			: 10px;
+}
+
+
+#floppy .button {
+	float		:right;
+	margin		:0;
+}
+
+
+#floppy .diod {
+	min-height			: 10px;
+	height				: 10px;
+	min-width			: 10px;
+	width				: 10px;
+	background-color	: #4f7942;
+	float				:left;
+	border				: 1px solid #99958c;
+}
+
+#floppy .diod.enabled {
+	background-color : #00ff00;
 }

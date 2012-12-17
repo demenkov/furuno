@@ -1,6 +1,16 @@
 //main function
 jQuery(document).ready(function($) {
 
+	$('#monitor-button').on('click', function() {
+		$(this).toggleClass('enabled');
+		$('#display').css('visibility', ($('#display').css('visibility') == 'hidden') ? 'visible' : 'hidden' );
+	});
+
+	$('#floppy .button').on('click', function() {
+		$(this).toggleClass('enabled').siblings('.diod').toggleClass('enabled');
+		felcom.disk = $(this).hasClass('enabled');
+	});
+
 		var felcom = {
 		lat		: '54:43:12',
 		lon		: '020:30:07',
