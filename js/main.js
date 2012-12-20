@@ -1,16 +1,6 @@
 //main function
 jQuery(document).ready(function($) {
 
-	$('#monitor-button').on('click', function() {
-		$(this).toggleClass('enabled');
-		$('#display').css('visibility', ($('#display').css('visibility') == 'hidden') ? 'visible' : 'hidden' );
-	});
-
-	$('#floppy .button').on('click', function() {
-		$(this).toggleClass('enabled').siblings('.diod').toggleClass('enabled');
-		felcom.disk = $(this).hasClass('enabled');
-	});
-
 		var felcom = {
 		lat		: '54:43:12',
 		lon		: '020:30:07',
@@ -56,6 +46,12 @@ jQuery(document).ready(function($) {
 			$('#status span.lon').html(
 				this.lon + letter
 			);
+		},
+		shutdown : function() {
+			$('.modal').modal('hide');
+			$('div.message').removeClass('active');
+			//remove not saved messages
+			$('div.message:not(.disk)').remove();
 		}
 	};
 
@@ -138,37 +134,37 @@ jQuery(document).ready(function($) {
 		});
 		//change date
 		var day, month, year;
-		day = $($('.modal:visible .modal-body #date span')[0]).html() + $($('.modal:visible .modal-body #date span')[1]).html();
-		month = $($('.modal:visible .modal-body #date span')[2]).html() + $($('.modal:visible .modal-body #date span')[3]).html();
-		year = 20 + $($('.modal:visible .modal-body #date span')[4]).html() + $($('.modal:visible .modal-body #date span')[5]).html();
+		day = $($('#system-setup .modal-body #date span')[0]).html() + $($('#system-setup .modal-body #date span')[1]).html();
+		month = $($('#system-setup .modal-body #date span')[2]).html() + $($('#system-setup .modal-body #date span')[3]).html();
+		year = 20 + $($('#system-setup .modal-body #date span')[4]).html() + $($('#system-setup .modal-body #date span')[5]).html();
 		if (day && month && year) {
 			felcom.date.setFullYear(year,parseInt(month) - 1,day);
 		}
 		//change dte2 port
-		var dte2port = $($('.modal:visible .modal-body #dte2-port span')[0]).html() +
-			$($('.modal:visible .modal-body #dte2-port span')[1]).html() +
-			$($('.modal:visible .modal-body #dte2-port span')[2]).html();
+		var dte2port = $($('#system-setup .modal-body #dte2-port span')[0]).html() +
+			$($('#system-setup .modal-body #dte2-port span')[1]).html() +
+			$($('#system-setup .modal-body #dte2-port span')[2]).html();
 		if (dte2port) {
 			felcom.dte2port = dte2port;
 		}
 		//change latitude
-		var lat = $($('.modal:visible .modal-body #lat span')[0]).html() +
-			$($('.modal:visible .modal-body #lat span')[1]).html() + ':' +
-			$($('.modal:visible .modal-body #lat span')[2]).html() +
-			$($('.modal:visible .modal-body #lat span')[3]).html() + ':' +
-			$($('.modal:visible .modal-body #lat span')[4]).html() +
-			$($('.modal:visible .modal-body #lat span')[5]).html();
+		var lat = $($('#ship-position .modal-body #lat span')[0]).html() +
+			$($('#ship-position .modal-body #lat span')[1]).html() + ':' +
+			$($('#ship-position .modal-body #lat span')[2]).html() +
+			$($('#ship-position .modal-body #lat span')[3]).html() + ':' +
+			$($('#ship-position .modal-body #lat span')[4]).html() +
+			$($('#ship-position .modal-body #lat span')[5]).html();
 		if (lat) {
 			felcom.lat = lat;
 		}
 		//change longitude
-		var lon = $($('.modal:visible .modal-body #lon span')[0]).html() +
-			$($('.modal:visible .modal-body #lon span')[1]).html() +
-			$($('.modal:visible .modal-body #lon span')[2]).html() + ':' +
-			$($('.modal:visible .modal-body #lon span')[3]).html() +
-			$($('.modal:visible .modal-body #lon span')[4]).html() + ':' +
-			$($('.modal:visible .modal-body #lon span')[5]).html() +
-			$($('.modal:visible .modal-body #lon span')[6]).html()
+		var lon = $($('#ship-position .modal-body #lon span')[0]).html() +
+			$($('#ship-position .modal-body #lon span')[1]).html() +
+			$($('#ship-position .modal-body #lon span')[2]).html() + ':' +
+			$($('#ship-position .modal-body #lon span')[3]).html() +
+			$($('#ship-position .modal-body #lon span')[4]).html() + ':' +
+			$($('#ship-position .modal-body #lon span')[5]).html() +
+			$($('#ship-position .modal-body #lon span')[6]).html()
 		if (lon) {
 			felcom.lon = lon;
 		}
@@ -277,5 +273,44 @@ jQuery(document).ready(function($) {
 			}
 		}
 		return false;
+	});
+	//close window
+	$(document).bind('keydown', 'Alt+x', function(){
+		var message = $('div.message.active');
+		message.remove();
+		return false;
+	});
+	//open files from disk
+	$('#open').on('click', function() {
+		if (!felcom.disk) {
+			$('#disk-not-inserted').modal('show');
+			$(document).on('keydown', function() {
+				$('#disk-not-inserted').modal('hide');
+			})
+		}
+	});
+
+/**		   ______            __             __
+		  / ____/___  ____  / /__________  / /____
+		 / /   / __ \/ __ \/ __/ ___/ __ \/ / ___/
+		/ /___/ /_/ / / / / /_/ /  / /_/ / (__  )
+		\____/\____/_/ /_/\__/_/   \____/_/____/
+*/
+
+	$('#monitor-button').on('click', function() {
+		$(this).toggleClass('enabled');
+		$('#display').css('visibility', ($('#display').css('visibility') == 'hidden') ? 'visible' : 'hidden' );
+		felcom.shutdown();
+	});
+
+	$('#floppy .button').on('click', function() {
+		var diod = $(this).siblings('.diod');
+
+		$(this).toggleClass('enabled')
+		$(diod).toggleClass('enabled');
+		setTimeout(function() {
+			$(diod).toggleClass('enabled');
+		}, 300);
+		felcom.disk = $(this).hasClass('enabled');
 	});
 });
