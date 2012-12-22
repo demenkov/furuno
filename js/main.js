@@ -54,14 +54,13 @@ jQuery(document).ready(function($) {
 			$('#workarea .message').not('.disk').last().toggleClass('active');
 		},
 		open : function() {
-			console.log('ff');
-			if (this.checkdisk()) {
+			if (felcom.checkdisk()) {
 
 			}
 			return false;
 		},
 		save : function() {
-			if (this.checkdisk()) {
+			if (felcom.checkdisk()) {
 
 			}
 			return false;
@@ -89,6 +88,40 @@ jQuery(document).ready(function($) {
 			}
 			return false;
 		},
+		format : function() {
+			if (felcom.checkdisk()) {
+				$('#disk-dialog').off('hide').find('tr').removeClass('active');;
+				$('#disk-dialog').modal('show');
+				$('#disk-dialog').on('hide', function(e) {
+					if (parseInt($(e.target).find('tr.active a').attr('confirm-value'))) {
+						//show message
+						$('#disk-formatting').modal('show');
+						//blink diod
+						felcom.formatting = setInterval(function(){felcom.blink()}, 60);
+						//call formatted thrught ten seconds
+						setTimeout(function(){
+							$('#disk-formatting').modal('hide');
+							felcom.formatted();
+						}, 10000);
+						//remove messages
+						$('.message.disk').remove();
+						$('#disk-dialog').off('hide');
+					}
+				});
+			}
+			return false;
+		},
+		formatted : function() {
+			if (felcom.checkdisk()) {
+				clearInterval(felcom.formatting);
+				$('#disk-formatted').modal('show');
+				setTimeout(function(){
+					$('#disk-formatted').modal('hide');
+				}, 3000);
+			}
+			return false;
+		},
+		//checks disk is inserted
 		checkdisk : function() {
 			if (!this.disk) {
 				$('#disk-not-inserted').modal('show');
@@ -101,7 +134,7 @@ jQuery(document).ready(function($) {
 			return true;
 		},
 		poweronoff : function() {
-			$(this).toggleClass('enabled');
+			$('#monitor-button').toggleClass('enabled');
 			$('#display').css('visibility', ($('#display').css('visibility') == 'hidden') ? 'visible' : 'hidden' );
 			felcom.shutdown();
 		},
@@ -121,7 +154,7 @@ jQuery(document).ready(function($) {
 			$(diod).toggleClass('enabled');
 			setTimeout(function() {
 				$(diod).toggleClass('enabled');
-			}, 300);
+			}, 30);
 		}
 	};
 
@@ -208,7 +241,6 @@ jQuery(document).ready(function($) {
 		month = $($('#system-setup .modal-body #date span')[2]).html() + $($('#system-setup .modal-body #date span')[3]).html();
 		day = $($('#system-setup .modal-body #date span')[4]).html() + $($('#system-setup .modal-body #date span')[5]).html();
 		if (day && month && year) {
-			console.log(year,parseInt(month) - 1,day)
 			felcom.date.setFullYear(year,parseInt(month) - 1,day);
 		}
 		//change dte2 port
@@ -347,6 +379,9 @@ jQuery(document).ready(function($) {
 	});
 	$(document).bind('keydown', 'Alt+s', function(){
 		felcom.save();
+	});
+	$('#format').on('click', function() {
+		felcom.format();
 	});
 
 /*		   ______            __             __

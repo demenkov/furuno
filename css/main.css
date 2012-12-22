@@ -332,3 +332,10 @@ tr.active span.active {
 #floppy .diod.enabled {
 	background-color : #00ff00;
 }
+
+.modal.status{
+	width		: 300px;
+	left		: 275px;
+	top			: 155px;
+	text-align	:center;
+}

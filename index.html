@@ -33,7 +33,7 @@
 								<li class="divider"></li>
 								<li><a href = "#">6:Print <span>ALT-P</span></a></li>
 								<li class="divider"></li>
-								<li><a href = "#">7:Format Disk</a></li>
+								<li><a id = "format" href = "#">7:Format Disk</a></li>
 								<li class="divider"></li>
 								<li><a href = "#">8:Quit</a></li>
 							</ul>
@@ -311,10 +311,38 @@
 							<textarea>Two disk messaage</textarea>
 						</div>
 					</div>
-					<div id = "disk-not-inserted" class = "modal hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+					<div id = "disk-not-inserted" class = "modal status hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
 						<div class="modal-body">
 							Floppy disk not inserted in drive.<br/>
 							Press any key to escape.
+						</div>
+					</div>
+					<div id = "disk-formatting" class = "modal status hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-body">
+							Now formating.
+						</div>
+					</div>
+					<div id = "disk-formatted" class = "modal status hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-body">
+							Formating completed.
+						</div>
+					</div>
+					<div id = "disk-dialog" class = "modal dialog hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-header">Format</div>
+						<div class="modal-body">
+							<p>OK to format FD?</p>
+							<table>
+								<tr>
+									<td>
+										<a confirm-value = "1" href = "#">Yes</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a confirm-value = "0" href = "#">No</a>
+									</td>
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>
