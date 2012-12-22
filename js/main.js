@@ -47,11 +47,81 @@ jQuery(document).ready(function($) {
 				this.lon + letter
 			);
 		},
+		new : function() {
+			$('#workarea .message.active').toggleClass('active');
+			var num = $('#workarea .message').not('.disk').length + 1;
+			$('#workarea').append('<div class = "message" tabindex="-1"><div class="modal-header">&lt;UNTITLED:' + num + '&gt;</div><div class="modal-body"><textarea></textarea></div></div>').show();
+			$('#workarea .message').not('.disk').last().toggleClass('active');
+		},
+		open : function() {
+			console.log('ff');
+			if (this.checkdisk()) {
+
+			}
+			return false;
+		},
+		save : function() {
+			if (this.checkdisk()) {
+
+			}
+			return false;
+		},
+		remove : function() {
+			var message = $('div.message.active');
+			message.remove();
+			return false;
+		},
+		switch : function() {
+			var messages = $('div.message');
+			if (!felcom.disk) {
+				messages = messages.not('.disk');
+			}
+			if (messages.length > 1) {
+				var visible = messages.filter('.active');
+					index = messages.index(visible);
+				visible.toggleClass('active')
+				if (messages.length-1 == index) {
+					$(messages[0]).toggleClass('active');
+				}
+				else {
+					$(messages[index+1]).toggleClass('active');
+				}
+			}
+			return false;
+		},
+		checkdisk : function() {
+			if (!this.disk) {
+				$('#disk-not-inserted').modal('show');
+				$(document).on('keypress', function() {
+					$('#disk-not-inserted').modal('hide');
+					$(document).off('keypress');
+				})
+				return false;
+			}
+			return true;
+		},
+		poweronoff : function() {
+			$(this).toggleClass('enabled');
+			$('#display').css('visibility', ($('#display').css('visibility') == 'hidden') ? 'visible' : 'hidden' );
+			felcom.shutdown();
+		},
+		insertremove : function() {
+			$('#floppy .button').toggleClass('enabled');
+			this.disk = $('#floppy .button').hasClass('enabled');
+			this.blink();
+		},
 		shutdown : function() {
 			$('.modal').modal('hide');
 			$('div.message').removeClass('active');
 			//remove not saved messages
 			$('div.message:not(.disk)').remove();
+		},
+		blink : function() {
+			var diod = $('div.diod');
+			$(diod).toggleClass('enabled');
+			setTimeout(function() {
+				$(diod).toggleClass('enabled');
+			}, 300);
 		}
 	};
 
@@ -134,10 +204,11 @@ jQuery(document).ready(function($) {
 		});
 		//change date
 		var day, month, year;
-		day = $($('#system-setup .modal-body #date span')[0]).html() + $($('#system-setup .modal-body #date span')[1]).html();
+		year = 20 + $($('#system-setup .modal-body #date span')[0]).html() + $($('#system-setup .modal-body #date span')[1]).html();
 		month = $($('#system-setup .modal-body #date span')[2]).html() + $($('#system-setup .modal-body #date span')[3]).html();
-		year = 20 + $($('#system-setup .modal-body #date span')[4]).html() + $($('#system-setup .modal-body #date span')[5]).html();
+		day = $($('#system-setup .modal-body #date span')[4]).html() + $($('#system-setup .modal-body #date span')[5]).html();
 		if (day && month && year) {
+			console.log(year,parseInt(month) - 1,day)
 			felcom.date.setFullYear(year,parseInt(month) - 1,day);
 		}
 		//change dte2 port
@@ -168,7 +239,7 @@ jQuery(document).ready(function($) {
 		if (lon) {
 			felcom.lon = lon;
 		}
-		//close modal
+		//close modals
 		$('.modal').modal('hide');
 	});
 
@@ -250,67 +321,46 @@ jQuery(document).ready(function($) {
  *		         /_/
  */
 	$('#new-text').on('click', function(){
-		$('#workarea .message.active').toggleClass('active');
-		var num = $('#workarea .message').not('.disk').length + 1;
-		$('#workarea').append('<div class = "message" tabindex="-1"><div class="modal-header">&lt;UNTITLED:' + num + '&gt;</div><div class="modal-body"><textarea></textarea></div></div>').show();
-		$('#workarea .message').not('.disk').last().toggleClass('active');
+		felcom.new();
+	});
+	$(document).bind('keydown', 'Alt+n', function(){
+		felcom.new();
 	});
 	//open next window
 	$(document).bind('keydown', 'Alt+v', function(){
-		var messages = $('div.message');
-		if (!felcom.disk) {
-			messages = messages.not('.disk');
-		}
-		if (messages.length > 1) {
-			var visible = messages.filter('.active');
-				index = messages.index(visible);
-			visible.toggleClass('active')
-			if (messages.length-1 == index) {
-				$(messages[0]).toggleClass('active');
-			}
-			else {
-				$(messages[index+1]).toggleClass('active');
-			}
-		}
-		return false;
+		felcom.switch();
 	});
 	//close window
 	$(document).bind('keydown', 'Alt+x', function(){
-		var message = $('div.message.active');
-		message.remove();
-		return false;
+		felcom.remove();
 	});
 	//open files from disk
 	$('#open').on('click', function() {
-		if (!felcom.disk) {
-			$('#disk-not-inserted').modal('show');
-			$(document).on('keydown', function() {
-				$('#disk-not-inserted').modal('hide');
-			})
-		}
+		felcom.open();
+	});
+	$(document).bind('keydown', 'Alt+q', function(){
+		felcom.open();
+	});
+	//save files to disk
+	$('#save').on('click', function() {
+		felcom.save();
+	});
+	$(document).bind('keydown', 'Alt+s', function(){
+		felcom.save();
 	});
 
-/**		   ______            __             __
-		  / ____/___  ____  / /__________  / /____
-		 / /   / __ \/ __ \/ __/ ___/ __ \/ / ___/
-		/ /___/ /_/ / / / / /_/ /  / /_/ / (__  )
-		\____/\____/_/ /_/\__/_/   \____/_/____/
-*/
+/*		   ______            __             __
+ *		  / ____/___  ____  / /__________  / /____
+ *		 / /   / __ \/ __ \/ __/ ___/ __ \/ / ___/
+ *		/ /___/ /_/ / / / / /_/ /  / /_/ / (__  )
+ *		\____/\____/_/ /_/\__/_/   \____/_/____/
+ */
 
 	$('#monitor-button').on('click', function() {
-		$(this).toggleClass('enabled');
-		$('#display').css('visibility', ($('#display').css('visibility') == 'hidden') ? 'visible' : 'hidden' );
-		felcom.shutdown();
+		felcom.poweronoff();
 	});
 
 	$('#floppy .button').on('click', function() {
-		var diod = $(this).siblings('.diod');
-
-		$(this).toggleClass('enabled')
-		$(diod).toggleClass('enabled');
-		setTimeout(function() {
-			$(diod).toggleClass('enabled');
-		}, 300);
-		felcom.disk = $(this).hasClass('enabled');
+		felcom.insertremove();
 	});
 });
