@@ -55,7 +55,45 @@ jQuery(document).ready(function($) {
 		},
 		open : function() {
 			if (felcom.checkdisk()) {
+				$('#disk-message-dialog').off('hide');
+				//fill message open table
+				$('#disk-message-dialog table tr:has(td)').remove();
+				$('#disk-message-dialog .modal-body p.count').remove();
+				$('.message.disk').each(function(i){
+					var title = $(this).children('.modal-header').html().slice(4,12).split('&gt;')[0];
+					var size = $(this).find('.modal-body textarea').val().length;
+					var date = $(this).attr('msg-date');
+					var time = $(this).attr('msg-time');
+					$('#disk-message-dialog table').append('<tr><td><a> ' + title + '</a></td><td> ' + size + '</td><td> ' + date + '</td><td> ' + time + '</td></tr>');
+				});
+				$('<p class = "count">' + $('.message.disk').length + ' Files exists</p>').insertBefore('#disk-message-dialog .modal-body p');
 
+				$('#disk-message-dialog').modal('show');
+				$('#disk-message-dialog').on('hide', function(e) {
+					//show message
+					setTimeout(function(){
+						$('#disk-loading').modal('show');
+					}, 10);
+					//blink diod
+					felcom.loading = setInterval(function(){felcom.blink()}, 60);
+					//call formatted thrught ten seconds
+					var messages = $('#disk-message-dialog tr:has(a)');
+					var selected = $('#disk-message-dialog tr.active');
+					var index = messages.index(selected);
+					setTimeout(function(){
+						$('#disk-loading').modal('hide');
+						felcom.opened(index);
+					}, 5000);
+					$('#disk-message-dialog').off('hide');
+				});
+			}
+			return false;
+		},
+		opened : function(index) {
+			if (felcom.checkdisk()) {
+				clearInterval(felcom.loading);
+				$('.message.active').removeClass('active');
+				$($('.message')[index]).addClass('active loaded');
 			}
 			return false;
 		},
@@ -64,7 +102,7 @@ jQuery(document).ready(function($) {
 				$('#disk-dialog-save').off('hide');
 				$('#disk-dialog-save').modal('show');
 				$('#disk-dialog-save input').focus();
-				$('#disk-dialog-save input').val($('.message.active .modal-header').html().slice(4,12));
+				$('#disk-dialog-save input').val($('.message.active .modal-header').html().slice(4,12).split('&gt;')[0]);
 				$('#disk-dialog-save').on('hide', function(e) {
 					//show message
 					setTimeout(function(){
@@ -77,7 +115,12 @@ jQuery(document).ready(function($) {
 						$('#disk-saving').modal('hide');
 						felcom.saved();
 					}, 5000);
-					$('.message.active').addClass('disk').find('.modal-header').html('&lt;' + $('#disk-dialog-save input').val() + '&gt;');
+					$('.message.active')
+						.addClass('disk loaded')
+						.attr('msg-date', felcom.date.toString("yy-MM-dd"))
+						.attr('msg-time', felcom.date.toString("HH:mm"))
+						.find('.modal-header')
+						.html('&lt;' + $('#disk-dialog-save input').val() + '&gt;');
 					$('#disk-dialog-save input').val('');
 					$('#disk-dialog-save').off('hide');
 				});
@@ -96,9 +139,9 @@ jQuery(document).ready(function($) {
 			return false;
 		},
 		switch : function() {
-			var messages = $('div.message');
-			if (!felcom.disk) {
-				messages = messages.not('.disk');
+			var messages = $('div.message').not('.disk');
+			if (felcom.disk) {
+				messages = messages.add('div.message.loaded');
 			}
 			if (messages.length > 1) {
 				var visible = messages.filter('.active');
@@ -323,7 +366,7 @@ jQuery(document).ready(function($) {
 
 	//process up and down buttons
 	function upDownPressed(e) {
-		var list = $('.modal:visible .modal-body tr');
+		var list = $('.modal:visible .modal-body tr:has(a)');
 		var current = $('.modal:visible .modal-body tr.active');
 		var index = list.index(current);
 		if (e.keyCode == 40 && index < list.length-1) {
@@ -343,7 +386,7 @@ jQuery(document).ready(function($) {
 	});
 
 	$('.modal').on('show', function () {
-		$(this).children('.modal-body').find('table tr:first').addClass('active');
+		$(this).children('.modal-body').find('table tr:has(a):first').addClass('active');
 		//set default station settings if it's isn't set
 		$(this).children('.modal-body').find('.btn-group').each(function(){
 			if ($(this).attr('felcom-key')) {

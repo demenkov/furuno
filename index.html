@@ -299,16 +299,36 @@
 							</table>
 						</div>
 					</div>
-					<div class = "message disk" tabindex="-1">
-						<div class="modal-header">&lt;Message one&gt;</div>
+					<div class = "message disk" tabindex="-1" msg-date = "01-04-30" msg-time = "22:40">
+						<div class="modal-header">&lt;Message1&gt;</div>
 						<div class="modal-body">
 							<textarea>One disk messaage</textarea>
 						</div>
 					</div>
-					<div class = "message disk" tabindex="-1">
-						<div class="modal-header">&lt;Message two&gt;</div>
+					<div class = "message disk" tabindex="-1" msg-date = "91-01-11" msg-time = "09:09">
+						<div class="modal-header">&lt;Message2&gt;</div>
 						<div class="modal-body">
 							<textarea>Two disk messaage</textarea>
+						</div>
+					</div>
+					<div id = "disk-message-dialog" class = "modal hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-header">Open</div>
+						<div class="modal-body">
+							<table>
+								<tr>
+									<th>File Name</th>
+									<th>Size</th>
+									<th>Date</th>
+									<th>Time</th>
+								</tr>
+							</table>
+							<div class="preview"></div>
+							<p>Space: display part view</p>
+						</div>
+					</div>
+					<div id = "disk-loading" class = "modal status hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-body">
+							Loading
 						</div>
 					</div>
 					<div id = "disk-not-inserted" class = "modal status hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
