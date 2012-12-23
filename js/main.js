@@ -90,12 +90,14 @@ jQuery(document).ready(function($) {
 		},
 		format : function() {
 			if (felcom.checkdisk()) {
-				$('#disk-dialog').off('hide').find('tr').removeClass('active');;
+				$('#disk-dialog').off('hide').find('tr').removeClass('active');
 				$('#disk-dialog').modal('show');
 				$('#disk-dialog').on('hide', function(e) {
 					if (parseInt($(e.target).find('tr.active a').attr('confirm-value'))) {
 						//show message
-						$('#disk-formatting').modal('show');
+						setTimeout(function(){
+							$('#disk-formatting').modal('show');
+						}, 10);
 						//blink diod
 						felcom.formatting = setInterval(function(){felcom.blink()}, 60);
 						//call formatted thrught ten seconds
@@ -230,7 +232,7 @@ jQuery(document).ready(function($) {
 	//close all modal windows when pressed enter
 	$(document).bind('keydown', 'return', function(e){
 		//change current station settings
-		$('.modal:visible').children('.modal-body').find('.btn-group').each(function(){
+		/*$('.modal:visible').children('.modal-body').find('.btn-group').each(function(){
 			if ($(this).attr('felcom-key')) {
 				felcom[$(this).attr('felcom-key')] = $(this).find('.active span.text').attr('felcom-val');
 			}
@@ -271,7 +273,7 @@ jQuery(document).ready(function($) {
 		if (lon) {
 			felcom.lon = lon;
 		}
-		//close modals
+		//close modals*/
 		$('.modal').modal('hide');
 	});
 
