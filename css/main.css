@@ -339,3 +339,22 @@ tr.active span.active {
 	top			: 155px;
 	text-align	:center;
 }
+
+.modal.dialog{
+	width		: 300px;
+}
+
+.modal.dialog table {
+	outline: 1px solid #FFFFFF;
+	float:right;
+}
+
+.modal.dialog .modal-header {
+	margin-left: 120px;
+}
+
+.modal.dialog input {
+	background-color	:#000000;
+	color				:#FFFFFF;
+	border				:none;
+}

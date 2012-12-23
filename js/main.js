@@ -61,7 +61,32 @@ jQuery(document).ready(function($) {
 		},
 		save : function() {
 			if (felcom.checkdisk()) {
-
+				$('#disk-dialog-save').off('hide');
+				$('#disk-dialog-save').modal('show');
+				$('#disk-dialog-save input').focus();
+				$('#disk-dialog-save input').val($('.message.active .modal-header').html().slice(4,12));
+				$('#disk-dialog-save').on('hide', function(e) {
+					//show message
+					setTimeout(function(){
+						$('#disk-saving').modal('show');
+					}, 10);
+					//blink diod
+					felcom.saving = setInterval(function(){felcom.blink()}, 60);
+					//call formatted thrught ten seconds
+					setTimeout(function(){
+						$('#disk-saving').modal('hide');
+						felcom.saved();
+					}, 5000);
+					$('.message.active').addClass('disk').find('.modal-header').html('&lt;' + $('#disk-dialog-save input').val() + '&gt;');
+					$('#disk-dialog-save input').val('');
+					$('#disk-dialog-save').off('hide');
+				});
+			}
+			return false;
+		},
+		saved :  function() {
+			if (felcom.checkdisk()) {
+				clearInterval(felcom.saving);
 			}
 			return false;
 		},
@@ -90,9 +115,9 @@ jQuery(document).ready(function($) {
 		},
 		format : function() {
 			if (felcom.checkdisk()) {
-				$('#disk-dialog').off('hide').find('tr').removeClass('active');
-				$('#disk-dialog').modal('show');
-				$('#disk-dialog').on('hide', function(e) {
+				$('#disk-dialog-format').off('hide').find('tr').removeClass('active');
+				$('#disk-dialog-format').modal('show');
+				$('#disk-dialog-format').on('hide', function(e) {
 					if (parseInt($(e.target).find('tr.active a').attr('confirm-value'))) {
 						//show message
 						setTimeout(function(){
@@ -107,7 +132,7 @@ jQuery(document).ready(function($) {
 						}, 10000);
 						//remove messages
 						$('.message.disk').remove();
-						$('#disk-dialog').off('hide');
+						$('#disk-dialog-format').off('hide');
 					}
 				});
 			}
@@ -232,7 +257,7 @@ jQuery(document).ready(function($) {
 	//close all modal windows when pressed enter
 	$(document).bind('keydown', 'return', function(e){
 		//change current station settings
-		/*$('.modal:visible').children('.modal-body').find('.btn-group').each(function(){
+		$('.modal:visible').children('.modal-body').find('.btn-group').each(function(){
 			if ($(this).attr('felcom-key')) {
 				felcom[$(this).attr('felcom-key')] = $(this).find('.active span.text').attr('felcom-val');
 			}
@@ -273,7 +298,7 @@ jQuery(document).ready(function($) {
 		if (lon) {
 			felcom.lon = lon;
 		}
-		//close modals*/
+		//close modals
 		$('.modal').modal('hide');
 	});
 
@@ -384,6 +409,10 @@ jQuery(document).ready(function($) {
 	});
 	$('#format').on('click', function() {
 		felcom.format();
+	});
+	$('#disk-dialog-format a').on('click', function() {
+		$(this).closest('tr').addClass('active').siblings('tr').removeClass('active');
+		$('.modal').modal('hide');
 	});
 
 /*		   ______            __             __
