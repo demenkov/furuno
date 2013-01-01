@@ -183,8 +183,16 @@ a:focus,
 
 }
 
+.modal-header span {
+	position	: absolute;
+	margin-top	: -6px;
+	background	: #000000;
+	border-left	: 4px solid black;
+	border-right: 4px solid black;
+}
+
 .modal-body {
-	padding	: 5px;
+	padding	: 10px;
 	outline	: 1px solid #FFFFFF;
 }
 

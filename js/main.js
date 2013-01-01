@@ -50,7 +50,7 @@ jQuery(document).ready(function($) {
 		new : function() {
 			$('#workarea .message.active').toggleClass('active');
 			var num = $('#workarea .message').not('.disk').length + 1;
-			$('#workarea').append('<div class = "message" tabindex="-1"><div class="modal-header">&lt;UNTITLED:' + num + '&gt;</div><div class="modal-body"><textarea></textarea></div></div>').show();
+			$('#workarea').append('<div class = "message" tabindex="-1"><div class="modal-header"><span>&lt;UNTITLED:' + num + '&gt;</span></div><div class="modal-body"><textarea></textarea></div></div>').show();
 			$('#workarea .message').not('.disk').last().toggleClass('active');
 		},
 		open : function() {
@@ -60,7 +60,7 @@ jQuery(document).ready(function($) {
 				$('#disk-message-dialog table tr:has(td)').remove();
 				$('#disk-message-dialog .modal-body p.count').remove();
 				$('.message.disk').each(function(i){
-					var title = $(this).children('.modal-header').html().slice(4,12).split('&gt;')[0];
+					var title = $(this).find('.modal-header span').html().slice(4,12).split('&gt;')[0];
 					var size = $(this).find('.modal-body textarea').val().length;
 					var date = $(this).attr('msg-date');
 					var time = $(this).attr('msg-time');
@@ -102,7 +102,7 @@ jQuery(document).ready(function($) {
 				$('#disk-dialog-save').off('hide');
 				$('#disk-dialog-save').modal('show');
 				$('#disk-dialog-save input').focus();
-				$('#disk-dialog-save input').val($('.message.active .modal-header').html().slice(4,12).split('&gt;')[0]);
+				$('#disk-dialog-save input').val($('.message.active .modal-header span').html().slice(4,12).split('&gt;')[0]);
 				$('#disk-dialog-save').on('hide', function(e) {
 					//show message
 					setTimeout(function(){
@@ -119,7 +119,7 @@ jQuery(document).ready(function($) {
 						.addClass('disk loaded')
 						.attr('msg-date', felcom.date.toString("yy-MM-dd"))
 						.attr('msg-time', felcom.date.toString("HH:mm"))
-						.find('.modal-header')
+						.find('.modal-header span')
 						.html('&lt;' + $('#disk-dialog-save input').val() + '&gt;');
 					$('#disk-dialog-save input').val('');
 					$('#disk-dialog-save').off('hide');
@@ -225,6 +225,9 @@ jQuery(document).ready(function($) {
 			setTimeout(function() {
 				$(diod).toggleClass('enabled');
 			}, 30);
+		},
+		send : function() {
+			$('#send').modal('show');
 		}
 	};
 
@@ -276,6 +279,9 @@ jQuery(document).ready(function($) {
 			else {
 				$(current).next('span').click();
 			}
+		}
+		else if ($('#send-menu').hasClass('dialog in')) {
+			$($('#send-menu li a')[String.fromCharCode( e.which ).toLowerCase()-1]).click();
 		}
 		return false;
 	}
@@ -472,4 +478,18 @@ jQuery(document).ready(function($) {
 	$('#floppy .button').on('click', function() {
 		felcom.insertremove();
 	});
+
+/*	   _____                __
+ *	  / ___/___  ____  ____/ /
+ *	  \__ \/ _ \/ __ \/ __  /
+ *	 ___/ /  __/ / / / /_/ /
+ *	/____/\___/_/ /_/\__,_/
+ */
+	$('#send-menu li a').on('click', function() {
+		$('.modal').modal('hide');
+		if ($(this).attr('href') == '#send') {
+			felcom.send();
+		}
+	});
+
 });

@@ -57,7 +57,7 @@
 								Send/Rec
 							</a>
 							<ul class="dropdown-menu f3" aria-labelledby="f3" role="menu">
-								<li><a href = "#">1:Send</a></li>
+								<li><a href = "#send-menu" data-toggle="modal">1:Send</a></li>
 								<li><a href = "#">2:Data Report</a></li>
 								<li><a href = "#">3:Receive message</a></li>
 								<li><a href = "#">4:EGC</a></li>
@@ -142,7 +142,7 @@
 				</div>
 				<div id = "workarea">
 					<div id = "system-setup" class = "modal hide" tabindex="-1" role = "dialog" aria-labelledby="SystemSetup" aria-hidden = "true" data-backdrop = "">
-						<div class="modal-header">System Setup</div>
+						<div class="modal-header"><span>System Setup</span></div>
 						<div class="modal-body">
 							<table>
 								<tr>
@@ -276,8 +276,8 @@
 							</table>
 						</div>
 					</div>
-					<div id = "ship-position" class = "modal hide" tabindex="-1" role = "dialog" aria-labelledby="SystemSetup" aria-hidden = "true" data-backdrop = "">
-						<div class="modal-header">Ship position</div>
+					<div id = "ship-position" class = "modal hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-header"><span>Ship position</span></div>
 						<div class="modal-body">
 							<table>
 								<tr>
@@ -299,20 +299,159 @@
 							</table>
 						</div>
 					</div>
+					<div id = "send-menu" class = "modal hide dialog" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-header"><span>Send</span></div>
+						<div class="modal-body">
+							<ul class = "nav">
+								<li>
+									<a href = "#send">1:Send message</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id = "send" class = "modal hide" tabindex="-1" role = "dialog"  aria-hidden = "true" data-backdrop = "">
+						<div class="modal-header"><span>Send message</span></div>
+						<div class="modal-body">
+							<table>
+								<tr>
+									<td><a href = "#">Priority</a></td>
+									<td>
+										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "priority">
+											<button type="button" class="btn active">
+												<span class = "text" felcom-val = "normal">Normal</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "distress">Distress</span>
+											</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Message</a></td>
+									<td>
+										Message now begin edited
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Station name</a></td>
+									<td>
+										<div id = "station-name">
+											<span class = "active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+										</dte2>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Destination type</a></td>
+									<td>
+										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "destination-type">
+											<button type="button" class="btn active">
+												<span class = "text" felcom-val = "telex">TELEX</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "pstn">PSTN</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "csdn">CSDN</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "psdn">PSDN</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "x400">X400</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "dnid">DNID</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "spec">SPEC</span>
+											</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Country/Ocean code</a></td>
+									<td>
+										<div id = "coc">
+											<span class = "active"></span><span></span><span></span>
+										</dte2>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Station ID</a></td>
+									<td>
+										<div id = "sid">
+											<span class = "active"></span><span></span><span></span><span></span>&nbsp;<span></span><span></span><span></span>
+										</dte2>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">LES ID</a></td>
+									<td>
+										<div id = "lid">
+											<span class = "active"></span><span></span><span></span>
+										</dte2>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Confirmation</a></td>
+									<td>
+										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "confirmation">
+											<button type="button" class="btn active">
+												<span class = "text" felcom-val = "on">ON</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "off">OFF</span>
+											</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Send delay</a></td>
+									<td>
+										<div id = "send-delay">
+											<span class = "active">0</span><span>0</span>:<span>0</span><span>0</span>
+										</dte2>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Delivery delay</a></td>
+									<td>
+										<div class="btn-group" data-toggle="buttons-radio" felcom-key = "delivery-delay">
+											<button type="button" class="btn active">
+												<span class = "text" felcom-val = "immediate">Immediate</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "deffered">Deffered</span>
+											</button>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
 					<div class = "message disk" tabindex="-1" msg-date = "01-04-30" msg-time = "22:40">
-						<div class="modal-header">&lt;Message1&gt;</div>
+						<div class="modal-header"><span>&lt;Message1&gt;</span></div>
 						<div class="modal-body">
 							<textarea>One disk messaage</textarea>
 						</div>
 					</div>
 					<div class = "message disk" tabindex="-1" msg-date = "91-01-11" msg-time = "09:09">
-						<div class="modal-header">&lt;Message2&gt;</div>
+						<div class="modal-header"><span>&lt;Message2&gt;</span></div>
 						<div class="modal-body">
 							<textarea>Two disk messaage</textarea>
 						</div>
 					</div>
 					<div id = "disk-message-dialog" class = "modal hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
-						<div class="modal-header">Open</div>
+						<div class="modal-header"><span>Open</span></div>
 						<div class="modal-body">
 							<table>
 								<tr>
@@ -348,7 +487,7 @@
 						</div>
 					</div>
 					<div id = "disk-dialog-format" class = "modal dialog hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
-						<div class="modal-header">Format</div>
+						<div class="modal-header"><span>Format</span></div>
 						<div class="modal-body">
 							<p>OK to format FD?</p>
 							<table>
@@ -366,7 +505,7 @@
 						</div>
 					</div>
 					<div id = "disk-dialog-save" class = "modal dialog hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
-						<div class="modal-header">Save</div>
+						<div class="modal-header"><span>Save</span></div>
 						<div class="modal-body">
 							<p>Saving file name</p>
 							<input type = "textfield" maxlength = "8"></input>
