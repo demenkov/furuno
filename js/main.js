@@ -158,36 +158,25 @@ jQuery(document).ready(function($) {
 		},
 		format : function() {
 			if (felcom.checkdisk()) {
-				$('#disk-dialog-format').off('hide').find('tr').removeClass('active');
-				$('#disk-dialog-format').modal('show');
-				$('#disk-dialog-format').on('hide', function(e) {
-					if (parseInt($(e.target).find('tr.active a').attr('confirm-value'))) {
-						//show message
-						setTimeout(function(){
-							$('#disk-formatting').modal('show');
-						}, 10);
-						//blink diod
-						felcom.formatting = setInterval(function(){felcom.blink()}, 60);
-						//call formatted thrught ten seconds
-						setTimeout(function(){
-							$('#disk-formatting').modal('hide');
-							felcom.formatted();
-						}, 10000);
-						//remove messages
-						$('.message.disk').remove();
-						$('#disk-dialog-format').off('hide');
-					}
-				});
+				felcom.confirm('OK to format FD?', felcom.formatting);
+			}
+			return false;
+		},
+		formatting : function() {
+			if (felcom.checkdisk()) {
+				//show message
+				felcom.status('Now formatting.', 10000, felcom.formatted);
+				//blink diod
+				felcom.diod = setInterval(felcom.blink, 60);
+				//remove messages
+				$('.message.disk').remove();
 			}
 			return false;
 		},
 		formatted : function() {
 			if (felcom.checkdisk()) {
-				clearInterval(felcom.formatting);
-				$('#disk-formatted').modal('show');
-				setTimeout(function(){
-					$('#disk-formatted').modal('hide');
-				}, 3000);
+				clearInterval(felcom.diod);
+				felcom.status('Formatting completed.', 3000);
 			}
 			return false;
 		},
@@ -227,7 +216,57 @@ jQuery(document).ready(function($) {
 			}, 30);
 		},
 		send : function() {
+			$('#send').on('hide', function(e) {
+				felcom.confirm('Send start', felcom.sending);
+				$('#send').off('hide');
+			});
 			$('#send').modal('show');
+			return false;
+		},
+		sending : function() {
+			felcom.status('Message is entered<br/>in<br/>sending buffer', 3000);
+			felcom.state('SENDING', 10000, felcom.sended);
+			return false;
+		},
+		sended : function() {
+			felcom.status('Successfull Sending message', 3000);
+		},
+		//set confirm dialog
+		confirm : function (text, callback) {
+			setTimeout(function(){
+				$('#confirm-dialog .modal-body p').text(text);
+				$('#confirm-dialog').modal('show');
+				$('#confirm-dialog').on('hide', function(e) {
+					if (parseInt($(e.target).find('tr.active a').attr('confirm-value'))) {
+						callback();
+					}
+					//remove on hide function
+					$('#confirm-dialog').off('hide');
+				});
+			}, 10);
+		},
+		//set current status message
+		status : function (text, interval, callback) {
+			setTimeout(function(){
+				$('#status-message .modal-body').html(text);
+				$('#status-message').modal('show');
+				setTimeout(function(){
+					$('#status-message').modal('hide');
+					if (callback) {
+						callback();
+					}
+				}, interval);
+			}, 10);
+		},
+		//set current state
+		state : function (text, interval, callback) {
+			$('span.state').html(text);
+			setTimeout(function(){
+				$('span.state').html('IDLE');
+				if (callback) {
+					callback();
+				}
+			}, interval);
 		}
 	};
 
@@ -392,6 +431,7 @@ jQuery(document).ready(function($) {
 	});
 
 	$('.modal').on('show', function () {
+		$(this).children('.modal-body').find('table tr').removeClass('active');
 		$(this).children('.modal-body').find('table tr:has(a):first').addClass('active');
 		//set default station settings if it's isn't set
 		$(this).children('.modal-body').find('.btn-group').each(function(){
@@ -407,10 +447,6 @@ jQuery(document).ready(function($) {
 		});
 		//set all modal settings
 		felcom.init();
-	});
-
-	$('.modal').on('hide', function (e) {
-		$(this).children('.modal-body').find('table tr').removeClass('active');
 	});
 
 	//inputs emulators
@@ -459,10 +495,6 @@ jQuery(document).ready(function($) {
 	$('#format').on('click', function() {
 		felcom.format();
 	});
-	$('#disk-dialog-format a').on('click', function() {
-		$(this).closest('tr').addClass('active').siblings('tr').removeClass('active');
-		$('.modal').modal('hide');
-	});
 
 /*		   ______            __             __
  *		  / ____/___  ____  / /__________  / /____
@@ -490,6 +522,18 @@ jQuery(document).ready(function($) {
 		if ($(this).attr('href') == '#send') {
 			felcom.send();
 		}
+	});
+/*
+ *	   ______            _____
+ *	  / ____/___  ____  / __(_)________ ___
+ *	 / /   / __ \/ __ \/ /_/ / ___/ __ `__ \
+ *	/ /___/ /_/ / / / / __/ / /  / / / / / /
+ *	\____/\____/_/ /_/_/ /_/_/  /_/ /_/ /_/
+ */
+
+	$('#confirm-dialog a').on('click', function() {
+		$(this).closest('tr').addClass('active').siblings('tr').removeClass('active');
+		$('#confirm-dialog').modal('hide');
 	});
 
 });

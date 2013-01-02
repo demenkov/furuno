@@ -15,6 +15,10 @@ h3.logo {
 	border-color		: #000000;
 }
 
+body {
+	width:1100px;
+}
+
 #menu {
 	font-size:.892em;
 }
@@ -353,8 +357,8 @@ tr.active span.active {
 }
 
 .modal.dialog table {
-	outline: 1px solid #FFFFFF;
-	float:right;
+	outline	:1px solid #FFFFFF;
+	float	:right;
 }
 
 .modal.dialog .modal-header {
@@ -376,4 +380,36 @@ th {
 #disk-message-dialog table tr:hover td a {
 	background-color	:#FFFFFF;
 	color				:#000000;
+}
+
+#status-bar {
+	min-height			: 755px;
+	height				: 755px;
+	min-width			: 200px;
+	width				: 200px;
+	float				: right;
+}
+
+#diods{
+	margin-top:255px;
+	background	: gray;
+	min-height	: 500px;
+	height		: 500px;
+	border		: 40px solid gray;
+}
+
+.lamp {
+	min-height			: 10px;
+	height				: 10px;
+	min-width			: 10px;
+	width				: 10px;
+	background-color	: #4f7942;
+	float				: left;
+	margin				:.2em;
+	border				: 1px solid #99958c;
+	border-radius		: 5px;
+}
+
+.lamp.active {
+	background-color	: red;
 }

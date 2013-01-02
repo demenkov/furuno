@@ -13,6 +13,19 @@
 		<title>Felcom 11</title>
 	</head>
 	<body class="tab-content">
+		<div id = "status-bar">
+			<div id = "diods">
+				<table>
+					<tr><td><h4><span class = "lamp"></span>POWER</h4></td></tr>
+					<tr><td><h4><span class = "lamp"></span>SYNC</h4></td></tr>
+					<tr><td><h4><span class = "lamp"></span>LOGIN</h4></td></tr>
+					<tr><td><h4><span class = "lamp"></span>SEND</h4></td></tr>
+					<tr><td><h4><span class = "lamp"></span>RECIEVE</h4></td></tr>
+					<tr><td><h4><span class = "lamp"></span>DISTRESS</h4></td></tr>
+					<tr><td><h4><span class = "lamp"></span>FQIL</h4></td></tr>
+				</table>
+			</div>
+		</div>
 		<div id = "monitor">
 			<h3 class = "logo">FURUNO</h3>
 			<div id = "display">
@@ -438,6 +451,29 @@
 							</table>
 						</div>
 					</div>
+					<!--Confirm dialog-->
+					<div id = "confirm-dialog" class = "modal dialog hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-body">
+							<p></p>
+							<table>
+								<tr>
+									<td>
+										<a confirm-value = "1" href = "#">Yes</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a confirm-value = "0" href = "#">No</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div id = "status-message" class = "modal status hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-body">
+							Now formatting.
+						</div>
+					</div>
 					<div class = "message disk" tabindex="-1" msg-date = "01-04-30" msg-time = "22:40">
 						<div class="modal-header"><span>&lt;Message1&gt;</span></div>
 						<div class="modal-body">
@@ -476,32 +512,9 @@
 							Press any key to escape.
 						</div>
 					</div>
-					<div id = "disk-formatting" class = "modal status hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+					<div id = "message-sending" class = "modal status hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
 						<div class="modal-body">
-							Now formatting.
-						</div>
-					</div>
-					<div id = "disk-formatted" class = "modal status hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
-						<div class="modal-body">
-							Formatting completed.
-						</div>
-					</div>
-					<div id = "disk-dialog-format" class = "modal dialog hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
-						<div class="modal-header"><span>Format</span></div>
-						<div class="modal-body">
-							<p>OK to format FD?</p>
-							<table>
-								<tr>
-									<td>
-										<a confirm-value = "1" href = "#">Yes</a>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<a confirm-value = "0" href = "#">No</a>
-									</td>
-								</tr>
-							</table>
+							Message is entered in sending buffer
 						</div>
 					</div>
 					<div id = "disk-dialog-save" class = "modal dialog hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
