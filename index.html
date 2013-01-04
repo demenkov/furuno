@@ -99,7 +99,7 @@
 								<li><a href = "#">2:EGC Setup</a></li>
 								<li><a href = "#">3:NCS Channel List</a></li>
 								<li><a href = "#">4:EGC Channel List</a></li>
-								<li><a href = "#">5:LES List</a></li>
+								<li><a href = "#les-list" data-toggle="modal">5:LES List</a></li>
 								<li><a href = "#">6:Station List</a></li>
 								<li><a href = "#ship-position" data-toggle="modal">7:Ship Position</a></li>
 							</ul>
@@ -350,7 +350,7 @@
 									<td><a href = "#">Station name</a></td>
 									<td>
 										<div id = "station-name">
-											<span class = "active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 										</dte2>
 									</td>
 								</tr>
@@ -392,7 +392,7 @@
 									<td><a href = "#">Country/Ocean code</a></td>
 									<td>
 										<div id = "coc">
-											<span class = "active"></span><span></span><span></span>
+											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 										</dte2>
 									</td>
 								</tr>
@@ -400,7 +400,7 @@
 									<td><a href = "#">Station ID</a></td>
 									<td>
 										<div id = "sid">
-											<span class = "active"></span><span></span><span></span><span></span>&nbsp;<span></span><span></span><span></span>
+											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>&nbsp;<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 										</dte2>
 									</td>
 								</tr>
@@ -408,7 +408,7 @@
 									<td><a href = "#">LES ID</a></td>
 									<td>
 										<div id = "lid">
-											<span class = "active"></span><span></span><span></span>
+											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 										</dte2>
 									</td>
 								</tr>
@@ -448,6 +448,10 @@
 										</div>
 									</td>
 								</tr>
+								<tr>
+									<td></td>
+									<td>RET : Send Start</td>
+								</tr>
 							</table>
 						</div>
 					</div>
@@ -469,11 +473,85 @@
 							</table>
 						</div>
 					</div>
+					<!--Status message-->
 					<div id = "status-message" class = "modal status hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
 						<div class="modal-body">
 							Now formatting.
 						</div>
 					</div>
+					<!--les stations-->
+					<div id = "les-list" class = "modal hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-header"><span>LES List</span></div>
+						<div class="modal-body">
+							Ctrl+P: Print&nbsp;&nbsp;&nbsp;RET: list entry&nbsp;&nbsp;&nbsp;ESC: quit
+							<table>
+								<tr>
+									<td>No</td>
+									<td>AOR(WEST)<br/>Name</td>
+									<td>AOR(EAST)<br/>Name</td>
+									<td>POR<br/>Name</td>
+									<td>IOR<br/>Name</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td><a>Goonhilly</a></td>
+									<td><a>Burum</a></td>
+									<td><a>Perth</a></td>
+									<td><a>Sentosa</a></td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td><a>Burum</a></td>
+									<td><a>Eik</a></td>
+									<td><a>Sentosa</a></td>
+									<td><a>Nakhodka</a></td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td><a>Tangua</a></td>
+									<td><a>Odessa</a></td>
+									<td><a>Arvi</a></td>
+									<td><a>Yamaguchi</a></td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td><a>Southbury</a></td>
+									<td><a>Maadi</a></td>
+									<td></td>
+									<td><a>Santa Paula</a></td>
+								</tr>
+								<tr>
+									<td>5</td>
+									<td><a>Laurentides</a></td>
+									<td><a>Fucino</a></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>6</td>
+									<td></td>
+									<td><a>Sintra</a></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>7</td>
+									<td></td>
+									<td><a>Alta</a></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>8</td>
+									<td></td>
+									<td><a>Raisting</a></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
 					<div class = "message disk" tabindex="-1" msg-date = "01-04-30" msg-time = "22:40">
 						<div class="modal-header"><span>&lt;Message1&gt;</span></div>
 						<div class="modal-body">

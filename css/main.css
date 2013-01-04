@@ -413,3 +413,13 @@ th {
 .lamp.active {
 	background-color	: red;
 }
+
+#les-list table,
+#les-list tr:first-child {
+	border:1px solid white;
+}
+
+#les-list td {
+	border-left:1px solid white;
+	border-right:1px solid white;
+}

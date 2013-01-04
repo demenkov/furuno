@@ -337,6 +337,10 @@ jQuery(document).ready(function($) {
 	$(document).bind('keydown', 'left', leftRightPressed);
 	$(document).bind('keydown', 'up', upDownPressed);
 	$(document).bind('keydown', 'down', upDownPressed);
+	$(document).bind('keydown', 'up', lesNarrowPressed);
+	$(document).bind('keydown', 'down', lesNarrowPressed);
+	$(document).bind('keydown', 'left', lesNarrowPressed);
+	$(document).bind('keydown', 'right', lesNarrowPressed);
 
 	//close all modal windows when pressed functional button
 	$('.dropdown-toggle').on('click', function(){
@@ -393,7 +397,7 @@ jQuery(document).ready(function($) {
 	//process left and right buttons
 	function leftRightPressed(e) {
 		//if opened popup window change setting state
-		var current = $('.modal:visible tr.active .btn-group button.active');
+		var current = $('.modal:visible:not(#les-list) tr.active .btn-group button.active');
 		var list = $('.modal:visible tr.active .btn-group button')
 		if (!current.length && !list.length) {
 			list = $('.modal-body tr.active span');
@@ -411,7 +415,7 @@ jQuery(document).ready(function($) {
 
 	//process up and down buttons
 	function upDownPressed(e) {
-		var list = $('.modal:visible .modal-body tr:has(a)');
+		var list = $('.modal:visible:not(#les-list) .modal-body tr:has(a)');
 		var current = $('.modal:visible .modal-body tr.active');
 		var index = list.index(current);
 		if (e.keyCode == 40 && index < list.length-1) {
@@ -425,12 +429,12 @@ jQuery(document).ready(function($) {
 		return false;
 	}
 
-	$('.modal-body td').on('click', function(){
+	$('.modal:not(#les-list) .modal-body td').on('click', function(){
 		$(this).parents('tr').siblings('tr').removeClass('active');
 		$(this).parents('tr').addClass('active').find('span:first').focus();
 	});
 
-	$('.modal').on('show', function () {
+	$('.modal:not(#les-list)').on('show', function () {
 		$(this).children('.modal-body').find('table tr').removeClass('active');
 		$(this).children('.modal-body').find('table tr:has(a):first').addClass('active');
 		//set default station settings if it's isn't set
@@ -450,7 +454,7 @@ jQuery(document).ready(function($) {
 	});
 
 	//inputs emulators
-	$('.modal-body tr span').on('click', function(){
+	$('.modal:not(#les-list) .modal-body tr span').on('click', function(){
 		$(this).siblings('span').removeClass('active');
 		$(this).addClass('active');
 	});
@@ -511,11 +515,11 @@ jQuery(document).ready(function($) {
 		felcom.insertremove();
 	});
 
-/*	   _____                __
- *	  / ___/___  ____  ____/ /
- *	  \__ \/ _ \/ __ \/ __  /
- *	 ___/ /  __/ / / / /_/ /
- *	/____/\___/_/ /_/\__,_/
+/*		   _____                __
+ *		  / ___/___  ____  ____/ /
+ *		  \__ \/ _ \/ __ \/ __  /
+ *		 ___/ /  __/ / / / /_/ /
+ *		/____/\___/_/ /_/\__,_/
  */
 	$('#send-menu li a').on('click', function() {
 		$('.modal').modal('hide');
@@ -524,16 +528,53 @@ jQuery(document).ready(function($) {
 		}
 	});
 /*
- *	   ______            _____
- *	  / ____/___  ____  / __(_)________ ___
- *	 / /   / __ \/ __ \/ /_/ / ___/ __ `__ \
- *	/ /___/ /_/ / / / / __/ / /  / / / / / /
- *	\____/\____/_/ /_/_/ /_/_/  /_/ /_/ /_/
+ *	 	   ______            _____
+ *		  / ____/___  ____  / __(_)________ ___
+ *		 / /   / __ \/ __ \/ /_/ / ___/ __ `__ \
+ *		/ /___/ /_/ / / / / __/ / /  / / / / / /
+ *		\____/\____/_/ /_/_/ /_/_/  /_/ /_/ /_/
  */
 
 	$('#confirm-dialog a').on('click', function() {
 		$(this).closest('tr').addClass('active').siblings('tr').removeClass('active');
 		$('#confirm-dialog').modal('hide');
 	});
+
+/*  	    __    ___________
+ *  	   / /   / ____/ ___/
+ *  	  / /   / __/  \__ \
+ *		 / /___/ /___ ___/ /
+ *		/_____/_____//____/
+ */
+
+ 	$('#les-list').on('show', function () {
+		if (!$(this).children('.modal-body').find('table tr.active td.active').length) {
+			var parent = $(this).children('.modal-body');
+			$(parent).find('tr').removeClass('active');
+			$(parent).find('td').removeClass('active');
+			$($(parent).find('tr:not(:first)')[0]).addClass('active').find('td:not(:first)').addClass('active');
+		}
+	});
+
+	function lesNarrowPressed(e) {
+		var trs = $('#les-list:visible .modal-body tr:not(:first)');
+		var tds = $(trs).find('td:not(:first)');
+		if (trs.length && tds.length) {
+			var trCurrent = trs.filter('.active');
+			var tdCurrent = tds.filter('.active');
+			var trIndex = trs.index(trCurrent);
+			var tdIndex = tds.index(tdCurrent);
+			if (e.keyCode == 40 && trIndex < trs.length-1) {
+				trs.removeClass('active');
+				$(trs[trIndex+1]).addClass('active');
+			}
+			if (e.keyCode == 38 && trIndex > 0) {
+				trs.removeClass('active');
+				$(trs[trIndex-1]).addClass('active');
+			}
+		}
+		return false;
+	}
+
 
 });
