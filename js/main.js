@@ -289,20 +289,8 @@ jQuery(document).ready(function($) {
 		$('#' + fnKeys[e.which]).click();
 		return false;
 	}
-
-	//add events for numeric buttons
-	$(document).bind('keydown', '1', numberPressed);
-	$(document).bind('keydown', '2', numberPressed);
-	$(document).bind('keydown', '3', numberPressed);
-	$(document).bind('keydown', '4', numberPressed);
-	$(document).bind('keydown', '5', numberPressed);
-	$(document).bind('keydown', '6', numberPressed);
-	$(document).bind('keydown', '7', numberPressed);
-	$(document).bind('keydown', '8', numberPressed);
-	$(document).bind('keydown', '9', numberPressed);
-	$(document).bind('keydown', '0', numberPressed);
 	//process numeric buttons
-	function numberPressed(e) {
+	function inputPressed(e) {
 		//if opened menu and itrem with this index exisis focus on it
 		if ($('#menu li.dropdown.open ul li a').length) {
 			$($('#menu li.dropdown.open ul li a')[String.fromCharCode( e.which ).toLowerCase() - 1]).click();
@@ -310,13 +298,19 @@ jQuery(document).ready(function($) {
 		//if its inpit emulate change number and go to next
 		else if($('.modal-body tr.active span.active').length) {
 			var spans = $('.modal-body tr.active span'),
-				current = $('.modal-body tr.active span.active');
-			$(current).html(String.fromCharCode( e.which ).toLowerCase());
-			if (spans.length-1 == $(spans).index(current)) {
-				$($(spans)[0]).click();
-			}
-			else {
-				$(current).next('span').click();
+				current = $('.modal-body tr.active span.active'),
+				allowed = '1234567890';
+			var html = (e.data.indexOf("Shift") === -1) ? String.fromCharCode( e.which ).toLowerCase() : String.fromCharCode( e.which );
+			if (($(current).parent().attr('data') === 'numeric' && allowed.indexOf(html) !== -1)
+				|| !$(current).parent().attr('data')) {
+
+				$(current).html(html);
+				if (spans.length-1 == $(spans).index(current)) {
+					$($(spans)[0]).click();
+				}
+				else {
+					$(current).next('span').click();
+				}
 			}
 		}
 		else if ($('#send-menu').hasClass('dialog in')) {
@@ -552,29 +546,109 @@ jQuery(document).ready(function($) {
 			var parent = $(this).children('.modal-body');
 			$(parent).find('tr').removeClass('active');
 			$(parent).find('td').removeClass('active');
-			$($(parent).find('tr:not(:first)')[0]).addClass('active').find('td:not(:first)').addClass('active');
+			var tr = $($(parent).find('tr:not(:first)')[0])
+			tr.addClass('active')
+			$(tr.find('td:not(:first)')[0]).addClass('active');
 		}
 	});
 
 	function lesNarrowPressed(e) {
 		var trs = $('#les-list:visible .modal-body tr:not(:first)');
-		var tds = $(trs).find('td:not(:first)');
-		if (trs.length && tds.length) {
+		if (trs.length) {
 			var trCurrent = trs.filter('.active');
-			var tdCurrent = tds.filter('.active');
 			var trIndex = trs.index(trCurrent);
+			var tds = $(trCurrent).find('td:not(:first)');
+			var tdCurrent = tds.filter('.active');
 			var tdIndex = tds.index(tdCurrent);
 			if (e.keyCode == 40 && trIndex < trs.length-1) {
 				trs.removeClass('active');
+				tds.removeClass('active');
 				$(trs[trIndex+1]).addClass('active');
+				$($(trs[trIndex+1]).find('td:not(:first)')[tdIndex]).addClass('active');
 			}
 			if (e.keyCode == 38 && trIndex > 0) {
 				trs.removeClass('active');
+				tds.removeClass('active');
 				$(trs[trIndex-1]).addClass('active');
+				$($(trs[trIndex-1]).find('td:not(:first)')[tdIndex]).addClass('active');
+			}
+			if (e.keyCode == 39 && tds[tdIndex+1]) {
+				tds.removeClass('active');
+				$(tds[tdIndex+1]).addClass('active');
+			}
+			if (e.keyCode == 37 && tds[tdIndex-1]) {
+				tds.removeClass('active');
+				$(tds[tdIndex-1]).addClass('active');
 			}
 		}
 		return false;
 	}
 
+
+
+
+	//add events for numeric buttons
+	$(document).bind('keydown', '1', inputPressed);
+	$(document).bind('keydown', '2', inputPressed);
+	$(document).bind('keydown', '3', inputPressed);
+	$(document).bind('keydown', '4', inputPressed);
+	$(document).bind('keydown', '5', inputPressed);
+	$(document).bind('keydown', '6', inputPressed);
+	$(document).bind('keydown', '7', inputPressed);
+	$(document).bind('keydown', '8', inputPressed);
+	$(document).bind('keydown', '9', inputPressed);
+	$(document).bind('keydown', '0', inputPressed);
+	$(document).bind('keydown', 'a', inputPressed);
+	$(document).bind('keydown', 'b', inputPressed);
+	$(document).bind('keydown', 'c', inputPressed);
+	$(document).bind('keydown', 'd', inputPressed);
+	$(document).bind('keydown', 'e', inputPressed);
+	$(document).bind('keydown', 'f', inputPressed);
+	$(document).bind('keydown', 'g', inputPressed);
+	$(document).bind('keydown', 'h', inputPressed);
+	$(document).bind('keydown', 'i', inputPressed);
+	$(document).bind('keydown', 'j', inputPressed);
+	$(document).bind('keydown', 'k', inputPressed);
+	$(document).bind('keydown', 'l', inputPressed);
+	$(document).bind('keydown', 'm', inputPressed);
+	$(document).bind('keydown', 'n', inputPressed);
+	$(document).bind('keydown', 'o', inputPressed);
+	$(document).bind('keydown', 'p', inputPressed);
+	$(document).bind('keydown', 'q', inputPressed);
+	$(document).bind('keydown', 'r', inputPressed);
+	$(document).bind('keydown', 's', inputPressed);
+	$(document).bind('keydown', 't', inputPressed);
+	$(document).bind('keydown', 'u', inputPressed);
+	$(document).bind('keydown', 'v', inputPressed);
+	$(document).bind('keydown', 'w', inputPressed);
+	$(document).bind('keydown', 'x', inputPressed);
+	$(document).bind('keydown', 'y', inputPressed);
+	$(document).bind('keydown', 'z', inputPressed);
+	$(document).bind('keydown', 'Shift+a', inputPressed);
+	$(document).bind('keydown', 'Shift+b', inputPressed);
+	$(document).bind('keydown', 'Shift+c', inputPressed);
+	$(document).bind('keydown', 'Shift+d', inputPressed);
+	$(document).bind('keydown', 'Shift+e', inputPressed);
+	$(document).bind('keydown', 'Shift+f', inputPressed);
+	$(document).bind('keydown', 'Shift+g', inputPressed);
+	$(document).bind('keydown', 'Shift+h', inputPressed);
+	$(document).bind('keydown', 'Shift+i', inputPressed);
+	$(document).bind('keydown', 'Shift+j', inputPressed);
+	$(document).bind('keydown', 'Shift+k', inputPressed);
+	$(document).bind('keydown', 'Shift+l', inputPressed);
+	$(document).bind('keydown', 'Shift+m', inputPressed);
+	$(document).bind('keydown', 'Shift+n', inputPressed);
+	$(document).bind('keydown', 'Shift+o', inputPressed);
+	$(document).bind('keydown', 'Shift+p', inputPressed);
+	$(document).bind('keydown', 'Shift+q', inputPressed);
+	$(document).bind('keydown', 'Shift+r', inputPressed);
+	$(document).bind('keydown', 'Shift+s', inputPressed);
+	$(document).bind('keydown', 'Shift+t', inputPressed);
+	$(document).bind('keydown', 'Shift+u', inputPressed);
+	$(document).bind('keydown', 'Shift+v', inputPressed);
+	$(document).bind('keydown', 'Shift+w', inputPressed);
+	$(document).bind('keydown', 'Shift+x', inputPressed);
+	$(document).bind('keydown', 'Shift+y', inputPressed);
+	$(document).bind('keydown', 'Shift+z', inputPressed);
 
 });

@@ -236,17 +236,10 @@ button.btn {
 	padding: 4px 2px;
 }
 
-tr.active .btn-group button.btn.active span.text {
-	color				:#000000;
-	background-color	:#FFFFFF;
-}
-
-tr.active a {
-	color				:#000000;
-	background-color	:#FFFFFF;
-}
-
-tr.active span.active {
+tr.active .btn-group button.btn.active span.text,
+tr.active a,
+tr.active span.active,
+tr.active td.active {
 	color		: #000000;
 	background	: #FFFFFF;
 }
@@ -352,7 +345,7 @@ tr.active span.active {
 	text-align	:center;
 }
 
-.modal.dialog{
+.modal.dialog {
 	width		: 300px;
 }
 
@@ -422,4 +415,9 @@ th {
 #les-list td {
 	border-left:1px solid white;
 	border-right:1px solid white;
+}
+
+#les-edit table {
+	outline:none;
+	border-bottom: 1px dashed white;
 }

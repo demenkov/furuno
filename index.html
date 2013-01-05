@@ -161,7 +161,7 @@
 								<tr>
 									<td><a href = "#">System Date (UTC)</a></td>
 									<td>
-										<div id = "date">
+										<div id = "date" data = "numeric">
 											<span class = "active">1</span><span>2</span>-<span>1</span><span>2</span>-<span>1</span><span>2</span> (YY-MM-DD)
 										</div>
 									</td>
@@ -227,7 +227,7 @@
 								<tr>
 									<td><a href = "#">DTE2 Port Sub-addr.</a></td>
 									<td>
-										<div id = "dte2-port">
+										<div id = "dte2-port" data = "numeric">
 											<span class = "active">0</span><span>0</span><span>1</span>
 										</dte2>
 									</td>
@@ -391,7 +391,7 @@
 								<tr>
 									<td><a href = "#">Country/Ocean code</a></td>
 									<td>
-										<div id = "coc">
+										<div id = "coc" data = "numeric">
 											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 										</dte2>
 									</td>
@@ -399,7 +399,7 @@
 								<tr>
 									<td><a href = "#">Station ID</a></td>
 									<td>
-										<div id = "sid">
+										<div id = "sid" data = "numeric">
 											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>&nbsp;<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 										</dte2>
 									</td>
@@ -407,7 +407,7 @@
 								<tr>
 									<td><a href = "#">LES ID</a></td>
 									<td>
-										<div id = "lid">
+										<div id = "lid" data = "numeric">
 											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
 										</dte2>
 									</td>
@@ -429,7 +429,7 @@
 								<tr>
 									<td><a href = "#">Send delay</a></td>
 									<td>
-										<div id = "send-delay">
+										<div id = "send-delay" data = "numeric">
 											<span class = "active">0</span><span>0</span>:<span>0</span><span>0</span>
 										</dte2>
 									</td>
@@ -494,61 +494,94 @@
 								</tr>
 								<tr>
 									<td>1</td>
-									<td><a>Goonhilly</a></td>
-									<td><a>Burum</a></td>
-									<td><a>Perth</a></td>
-									<td><a>Sentosa</a></td>
+									<td id = "002" cc = "51">Goonhilly</td>
+									<td id = "112" cc = "44">Burum</td>
+									<td id = "322" cc = "71">Perth</td>
+									<td id = "210" cc = "87">Sentosa</td>
 								</tr>
 								<tr>
 									<td>2</td>
-									<td><a>Burum</a></td>
-									<td><a>Eik</a></td>
-									<td><a>Sentosa</a></td>
-									<td><a>Nakhodka</a></td>
+									<td id = "012" cc = "44">Burum</td>
+									<td id = "104" cc = "56">Eik</td>
+									<td id = "328" cc = "87">Sentosa</td>
+									<td id = "212" cc = "64">Nakhodka</td>
 								</tr>
 								<tr>
 									<td>3</td>
-									<td><a>Tangua</a></td>
-									<td><a>Odessa</a></td>
-									<td><a>Arvi</a></td>
-									<td><a>Yamaguchi</a></td>
+									<td id = "014" cc = "38">Tangua</td>
+									<td id = "107" cc = "64">Odessa</td>
+									<td id = "306" cc = "81">Arvi</td>
+									<td id = "203" cc = "720">Yamaguchi</td>
 								</tr>
 								<tr>
 									<td>4</td>
-									<td><a>Southbury</a></td>
-									<td><a>Maadi</a></td>
+									<td id = "001" cc = "23">Southbury</td>
+									<td id = "103" cc = "91">Maadi</td>
 									<td></td>
-									<td><a>Santa Paula</a></td>
+									<td id = "201" cc = "23">Santa Paula</td>
 								</tr>
 								<tr>
 									<td>5</td>
-									<td><a>Laurentides</a></td>
-									<td><a>Fucino</a></td>
+									<td id = "032" cc = "21">Laurentides</td>
+									<td id = "105" cc = "43">Fucino</td>
 									<td></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td>6</td>
 									<td></td>
-									<td><a>Sintra</a></td>
+									<td id = "118" cc = "404">Sintra</td>
 									<td></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td>7</td>
 									<td></td>
-									<td><a>Alta</a></td>
+									<td id = "110" cc = "56">Alta</td>
 									<td></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td>8</td>
 									<td></td>
-									<td><a>Raisting</a></td>
+									<td id = "115" cc = "55">Raisting</td>
 									<td></td>
 									<td></td>
 								</tr>
 							</table>
+						</div>
+					</div>
+
+					<div id = "les-edit" class = "modal dialog hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-header"><span>Station</span></div>
+						<div class="modal-body">
+							<table>
+								<tr>
+									<td><a href = "#">Name:</a></td>
+									<td>
+										<div id = "les-name">
+											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+										</dte2>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">ID:</a></td>
+									<td>
+										<div id = "les-id" data = "numeric">
+											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+										</dte2>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Remarks:</a></td>
+									<td>
+										<div id = "les-mark">
+											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+										</dte2>
+									</td>
+								</tr>
+							</table>
+							Erase the Name to delete this LES
 						</div>
 					</div>
 
