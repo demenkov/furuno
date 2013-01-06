@@ -116,6 +116,11 @@ jQuery(document).ready(function($) {
 			}
 			return false;
 		},
+		close : function() {
+			var message = $('div.message.active');
+			message.removeClass('active');
+			return false;
+		},
 		remove : function() {
 			var message = $('div.message.active');
 			message.remove();
@@ -199,10 +204,6 @@ jQuery(document).ready(function($) {
 			}, 30);
 		},
 		send : function() {
-			$('#send').on('hide', function(e) {
-				felcom.confirm('Send start', felcom.sending);
-				$('#send').off('hide');
-			});
 			$('#send').modal('show');
 			return false;
 		},
@@ -250,7 +251,10 @@ jQuery(document).ready(function($) {
 					callback();
 				}
 			}, interval);
-		}
+		},
+		recieve : function(from, message) {
+			$('<div class = "message active receive" tabindex="-1"><div class="modal-header"><span>Display Receive Message &lt;R' + felcom.date.toString("0yyMMdd") + '.001&gt;</span></div><div class="modal-body">FROM: '+from+'<br/>TO FELCOM:<br/>' +message+ '</div></div>').insertAfter('.message:last');
+		},
 	};
 
 	//add events for functional buttons
@@ -438,6 +442,10 @@ jQuery(document).ready(function($) {
 			}, 5000);
 		}
 
+		if ($('.modal:visible').attr('id') === 'send') {
+			felcom.confirm('Send start', felcom.sending);
+		}
+
 		//close modals
 		$('.modal').modal('hide');
 	}
@@ -534,7 +542,16 @@ jQuery(document).ready(function($) {
 		felcom.switch();
 	});
 	//close window
+	$('#close').on('click', function() {
+		felcom.close();
+	});
 	$(document).bind('keydown', 'Alt+x', function(){
+		felcom.close();
+	});
+	$('#delete').on('click', function() {
+		felcom.remove();
+	});
+	$(document).bind('keydown', 'Alt+d', function(){
 		felcom.remove();
 	});
 	//open files from disk

@@ -448,3 +448,7 @@ th {
 	outline:none;
 	border-bottom: 1px dashed white;
 }
+
+.receive .modal-header {
+	margin-left:30%;
+}
