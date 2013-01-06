@@ -336,20 +336,29 @@ jQuery(document).ready(function($) {
 	$(document).bind('keydown', 'left', lesNarrowPressed);
 	$(document).bind('keydown', 'right', lesNarrowPressed);
 
-	$(document).bind('keydown', 'esc', function(){
+	$('input').bind('keydown', 'up', upDownPressed);
+	$('input').bind('keydown', 'down', upDownPressed);
+
+	$(document).bind('keydown', 'esc', escPressed);
+	$('input').bind('keydown', 'esc', escPressed);
+
+	function escPressed() {
 		if ($('.modal:visible').attr('id') === 'les-edit') {
 			setTimeout(function(){
 				$('#les-list').modal('show');
 			},150);
 		}
-	});
+	}
 
 	//close all modal windows when pressed functional button
 	$('.dropdown-toggle').on('click', function(){
 		$('.modal').modal('hide');
 	});
 	//close all modal windows when pressed enter
-	$(document).bind('keydown', 'return', function(e){
+	$(document).bind('keydown', 'return', returnPressed);
+	$('input').bind('keydown', 'return', returnPressed);
+
+	function returnPressed(e) {
 		//change current station settings
 		$('.modal:visible').children('.modal-body').find('.btn-group').each(function(){
 			if ($(this).attr('felcom-key')) {
@@ -419,7 +428,7 @@ jQuery(document).ready(function($) {
 
 		//close modals
 		$('.modal').modal('hide');
-	});
+	}
 
 	//process left and right buttons
 	function leftRightPressed(e) {
@@ -448,10 +457,12 @@ jQuery(document).ready(function($) {
 		if (e.keyCode == 40 && index < list.length-1) {
 			list.removeClass('active');
 			$(list[index+1]).addClass('active').find('td:first a').focus();
+			$(list[index+1]).find('input').focus()
 		}
 		if (e.keyCode == 38 && index > 0) {
 			list.removeClass('active');
 			$(list[index-1]).addClass('active').find('td:first a').focus();
+			$(list[index-1]).find('input').focus();
 		}
 		return false;
 	}
@@ -459,6 +470,7 @@ jQuery(document).ready(function($) {
 	$('.modal:not(#les-list) .modal-body td').on('click', function(){
 		$(this).parents('tr').siblings('tr').removeClass('active');
 		$(this).parents('tr').addClass('active').find('span:first').focus();
+		$(this).parents('tr').find('input:first').focus();
 	});
 
 	$('.modal:not(#les-list)').on('show', function () {
@@ -476,6 +488,10 @@ jQuery(document).ready(function($) {
 				}
 			}
 		});
+		//focus into first input
+		setTimeout(function(){
+			$('.modal:visible').find('input:first').focus();
+		},10);
 		//set all modal settings
 		felcom.init();
 	});
