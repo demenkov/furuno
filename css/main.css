@@ -283,9 +283,9 @@ tr.active td.active {
 	height				: 15px;
 	min-width			: 15px;
 	width				: 15px;
-	background-color	: #960018;
+	background-color	: #000000;
 	cursor				: pointer;
-	border: 1px solid #00ffff;
+	border				: 1px solid #00ffff;
 	border-radius		: 4px;
 }
 
@@ -373,6 +373,33 @@ th {
 #disk-message-dialog table tr:hover td a {
 	background-color	:#FFFFFF;
 	color				:#000000;
+}
+
+#disk-message-dialog table {
+	width	:69%;
+	float	:left;
+}
+
+#disk-message-dialog .preview {
+	width	:29%;
+	float	:right;
+	border	:1px solid white;
+}
+
+#disk-message-dialog .preview .header {
+	margin-top: -10px;
+	margin-left: 30px;
+}
+
+#disk-message-dialog .preview .header span {
+	background:black;
+	border:2px solid black;
+}
+
+#disk-message-dialog .preview .body {
+	min-height	: 8em;
+	height		: 8em;
+	padding		: .5em;
 }
 
 #status-bar {

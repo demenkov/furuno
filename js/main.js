@@ -69,23 +69,6 @@ jQuery(document).ready(function($) {
 				$('<p class = "count">' + $('.message.disk').length + ' Files exists</p>').insertBefore('#disk-message-dialog .modal-body p');
 
 				$('#disk-message-dialog').modal('show');
-				$('#disk-message-dialog').on('hide', function(e) {
-					//show message
-					setTimeout(function(){
-						$('#disk-loading').modal('show');
-					}, 10);
-					//blink diod
-					felcom.loading = setInterval(function(){felcom.blink()}, 60);
-					//call formatted thrught ten seconds
-					var messages = $('#disk-message-dialog tr:has(a)');
-					var selected = $('#disk-message-dialog tr.active');
-					var index = messages.index(selected);
-					setTimeout(function(){
-						$('#disk-loading').modal('hide');
-						felcom.opened(index);
-					}, 5000);
-					$('#disk-message-dialog').off('hide');
-				});
 			}
 			return false;
 		},
@@ -350,6 +333,18 @@ jQuery(document).ready(function($) {
 		}
 	}
 
+	$(document).bind('keydown', 'space', spacePressed);
+
+	function spacePressed() {
+		if ($('.modal:visible').attr('id') === 'disk-message-dialog') {
+			var messages = $('#disk-message-dialog tr:has(a)');
+			var selected = $('#disk-message-dialog tr.active');
+			var index = messages.index(selected);
+			var text = $($('.message')[index]).find('textarea').text();
+			$(this).find('.body').text(text.substring(0,60))
+		}
+	}
+
 	//close all modal windows when pressed functional button
 	$('.dropdown-toggle').on('click', function(){
 		$('.modal').modal('hide');
@@ -424,6 +419,23 @@ jQuery(document).ready(function($) {
 			$('.modal').modal('hide');
 			$('#les-list').modal('show');
 			return;
+		}
+
+		if ($('.modal:visible').attr('id') === 'disk-message-dialog') {
+			//show message
+			setTimeout(function(){
+				$('#disk-loading').modal('show');
+			}, 10);
+			//blink diod
+			felcom.loading = setInterval(function(){felcom.blink()}, 60);
+			//call formatted thrught ten seconds
+			var messages = $('#disk-message-dialog tr:has(a)');
+			var selected = $('#disk-message-dialog tr.active');
+			var index = messages.index(selected);
+			setTimeout(function(){
+				$('#disk-loading').modal('hide');
+				felcom.opened(index);
+			}, 5000);
 		}
 
 		//close modals
