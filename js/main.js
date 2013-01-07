@@ -323,6 +323,9 @@ jQuery(document).ready(function($) {
 	$(document).bind('keydown', 'left', lesNarrowPressed);
 	$(document).bind('keydown', 'right', lesNarrowPressed);
 
+	$(document).bind('keydown', 'up', stationUpDownPressed);
+	$(document).bind('keydown', 'down', stationUpDownPressed);
+
 	$('input').bind('keydown', 'up', upDownPressed);
 	$('input').bind('keydown', 'down', upDownPressed);
 
@@ -333,6 +336,11 @@ jQuery(document).ready(function($) {
 		if ($('.modal:visible').attr('id') === 'les-edit') {
 			setTimeout(function(){
 				$('#les-list').modal('show');
+			},150);
+		}
+		if ($('.modal:visible').attr('id') === 'station-edit') {
+			setTimeout(function(){
+				$('#station-list').modal('show');
 			},150);
 		}
 	}
@@ -422,6 +430,32 @@ jQuery(document).ready(function($) {
 			//close modal
 			$('.modal').modal('hide');
 			$('#les-list').modal('show');
+			return;
+		}
+
+		//if its station list
+		if ($('.modal:visible').attr('id') === 'station-list') {
+			$(this).find('td.active').click();
+			return;
+		}
+
+		//if its station edit
+		if ($('.modal:visible').attr('id') === 'station-edit') {
+			var station = $('#station-list td.active'),
+				name = $('#edit-station-name input').val(),
+				mark = $('#edit-mark input').val(),
+				id = $('#edit-sid input').val(),
+				cc = $('#edit-cc input').val(),
+				type = $('#edit-type button.active span').attr('felcom-val');
+			if (name.length) {
+				station.attr('id', id).attr('mark', mark).attr('cc', cc).attr('type', type).text(name);
+			}
+			else {
+				station.attr('id', '').attr('mark', '').attr('cc', '').attr('type', '').text('');
+			}
+			//close modal
+			$('.modal').modal('hide');
+			$('#station-list').modal('show');
 			return;
 		}
 
@@ -659,7 +693,6 @@ jQuery(document).ready(function($) {
 				$(tds[tdIndex-1]).addClass('active');
 			}
 		}
-		return false;
 	}
 
 	$('#les-list td').on('click', function () {
@@ -682,6 +715,64 @@ jQuery(document).ready(function($) {
 		$('#les-edit').modal('show');
 	});
 
+/*		   _____ __        __  _
+ *		  / ___// /_____ _/ /_(_)___  ____
+ *		  \__ \/ __/ __ `/ __/ / __ \/ __ \
+ *		 ___/ / /_/ /_/ / /_/ / /_/ / / / /
+ *		/____/\__/\__,_/\__/_/\____/_/ /_/
+ */
+	$('#station-list').on('show', function () {
+		if (!$(this).children('.modal-body').find('table td.active').length) {
+			var parent = $(this).children('.modal-body');
+			$(parent).find('td').removeClass('active');
+			$(parent.find('td:not(:first)')[0]).addClass('active');
+		}
+	});
+
+	function stationUpDownPressed(e) {
+		var tds = $('#station-list:visible .modal-body td:nth-child(even)');
+		if (tds.length) {
+			var tdCurrent = tds.filter('.active');
+			var tdIndex = tds.index(tdCurrent);
+			if (e.keyCode == 40 && tdIndex < tds.length-1) {
+				tds.removeClass('active');
+				$(tds[tdIndex+1]).addClass('active');
+			}
+			if (e.keyCode == 38 && tdIndex > 0) {
+				tds.removeClass('active');
+				$(tds[tdIndex-1]).addClass('active');
+			}
+		}
+	}
+
+	$('#station-list td').on('click', function () {
+		$('#station-list td').removeClass('active');
+		$(this).addClass('active');
+		//close modals
+		$('.modal').modal('hide');
+		var id = $('#edit-sid input').val(''),
+			name = $('#edit-station-name input').val(''),
+			cc = $('#edit-coc input').val(''),
+			mark = $('#edit-mark input').val(''),
+			type = $('#edit-type');
+		if ($(this).attr('id')) {
+			id.val($(this).attr('id'));
+		}
+		if ($(this).text()) {
+			name.val($(this).text());
+		}
+		if ($(this).attr('mark')) {
+			mark.val($(this).attr('mark'));
+		}
+		if ($(this).attr('type')) {
+			type.find('button').removeClass('active');
+			type.find('span[felcom-val="'+$(this).attr('type')+'"]').closest('button').addClass('active');
+		}
+		if ($(this).attr('cc')) {
+			cc.val($(this).attr('cc'));
+		}
+		$('#station-edit').modal('show');
+	});
 
 
 	//add events for numeric buttons

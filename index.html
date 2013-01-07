@@ -100,7 +100,7 @@
 								<li><a href = "#">3:NCS Channel List</a></li>
 								<li><a href = "#">4:EGC Channel List</a></li>
 								<li><a href = "#les-list" data-toggle="modal">5:LES List</a></li>
-								<li><a href = "#">6:Station List</a></li>
+								<li><a href = "#station-list" data-toggle="modal">6:Station List</a></li>
 								<li><a href = "#ship-position" data-toggle="modal">7:Ship Position</a></li>
 							</ul>
 						</li>
@@ -350,8 +350,8 @@
 									<td><a href = "#">Station name</a></td>
 									<td>
 										<div id = "station-name">
-											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
-										</dte2>
+											<input maxlength = "15"></input>
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -392,24 +392,24 @@
 									<td><a href = "#">Country/Ocean code</a></td>
 									<td>
 										<div id = "coc" data = "numeric">
-											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
-										</dte2>
+											<input maxlength = "3"></input>
+										</div>
 									</td>
 								</tr>
 								<tr>
 									<td><a href = "#">Station ID</a></td>
 									<td>
 										<div id = "sid" data = "numeric">
-											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>&nbsp;<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
-										</dte2>
+											<input maxlength = "15"></input>
+										</div>
 									</td>
 								</tr>
 								<tr>
 									<td><a href = "#">LES ID</a></td>
 									<td>
 										<div id = "lid" data = "numeric">
-											<span class = "active">&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
-										</dte2>
+											<input maxlength = "3"></input>
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -431,7 +431,7 @@
 									<td>
 										<div id = "send-delay" data = "numeric">
 											<span class = "active">0</span><span>0</span>:<span>0</span><span>0</span>
-										</dte2>
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -584,6 +584,109 @@
 							Erase the Name to delete this LES
 						</div>
 					</div>
+					<!--station list-->
+					<div id = "station-list" class = "modal dialog hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-header"><span>Station List</span></div>
+						<div class="modal-body">
+							<table>
+								<tr>
+									<td>01</td>
+									<td id = "5644-325" cc = "64" type = "telex" mark = "Russia">KALININGRAD</td>
+								</tr>
+								<tr>
+									<td>02</td>
+									<td id = "5644-325" cc = "64" type = "telex" mark = "Russia">VLADIVOSTOK</td>
+								</tr>
+								<tr>
+									<td>03</td>
+									<td id = "5644-325" cc = "582" type = "telex" mark = "Ship">KUZMIN</td>
+								</tr>
+								<tr>
+									<td>04</td>
+									<td id = "5644-325" cc = "583" type = "telex" mark = "Ship">KHOTIN</td>
+								</tr>
+								<tr>
+									<td>05</td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+					<div id = "station-edit" class = "modal hide" tabindex="-1" role = "dialog" aria-hidden = "true" data-backdrop = "">
+						<div class="modal-header"><span>Station</span></div>
+						<div class="modal-body">
+							<table>
+								<tr>
+									<td><a href = "#">Name</a></td>
+									<td>
+										<div id = "edit-station-name">
+											<input maxlength = "15"></input>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Type</a></td>
+									<td>
+										<div id = "edit-type" class="btn-group" data-toggle="buttons-radio" felcom-key = "edit-destination-type">
+											<button type="button" class="btn active">
+												<span class = "text" felcom-val = "telex">TELEX</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "pstn">PSTN</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "csdn">CSDN</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "psdn">PSDN</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "x400">X400</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "dnid">DNID</span>
+												<span class = "delimiter">/</span>
+											</button>
+											<button type="button" class="btn">
+												<span class = "text" felcom-val = "spec">SPEC</span>
+											</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Country code</a></td>
+									<td>
+										<div id = "edit-coc">
+											<input maxlength = "3"></input>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Station ID</a></td>
+									<td>
+										<div id = "edit-sid">
+											<input maxlength = "15"></input>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><a href = "#">Remarks</a></td>
+									<td>
+										<div id = "edit-mark">
+											<input maxlength = "15"></input>
+										</div>
+									</td>
+								</tr>
+							</table>
+							Erase the Name to delete this Station
+						</div>
+					</div>
 
 					<div class = "message disk" tabindex="-1" msg-date = "01-04-30" msg-time = "22:40">
 						<div class="modal-header"><span>&lt;Help&gt;</span></div>
@@ -682,6 +785,7 @@ starboard.</textarea>
 
 		<!--[if lt IE 9]>
 		<script src="///js/html5.js"></script>
+		http://z0r.de/4827
 		<![endif]-->
 		<script type="text/javascript" src="js/jquery.min.js"> </script>
 		<script type="text/javascript" src="js/jquery.hotkeys.js"> </script>

@@ -239,7 +239,7 @@ button.btn {
 tr.active .btn-group button.btn.active span.text,
 tr.active a,
 tr.active span.active,
-tr.active td.active {
+td.active {
 	color		: #000000;
 	background	: #FFFFFF;
 }
@@ -350,15 +350,18 @@ tr.active td.active {
 }
 
 .modal.dialog table {
-	outline	:1px solid #FFFFFF;
 	float	:right;
+}
+
+#disk-message-dialog table {
+	outline	:1px solid #FFFFFF;;
 }
 
 .modal.dialog .modal-header {
 	margin-left: 120px;
 }
 
-.modal.dialog input {
+input {
 	background-color	:#000000;
 	color				:#FFFFFF;
 	border				:none;
@@ -444,11 +447,16 @@ th {
 	border-right:1px solid white;
 }
 
-#les-edit table {
+#les-edit table,
+#station-edit table {
 	outline:none;
 	border-bottom: 1px dashed white;
 }
 
 .receive .modal-header {
+	margin-left:30%;
+}
+
+#station-list .modal-header {
 	margin-left:30%;
 }
