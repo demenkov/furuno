@@ -336,12 +336,12 @@ jQuery(document).ready(function($) {
 		if ($('.modal:visible').attr('id') === 'les-edit') {
 			setTimeout(function(){
 				$('#les-list').modal('show');
-			},150);
+			},500);
 		}
 		if ($('.modal:visible').attr('id') === 'station-edit') {
 			setTimeout(function(){
 				$('#station-list').modal('show');
-			},150);
+			},500);
 		}
 	}
 
@@ -411,7 +411,7 @@ jQuery(document).ready(function($) {
 
 		//if its les list
 		if ($('.modal:visible').attr('id') === 'les-list') {
-			$(this).find('td.active').click();
+			$('#les-list').find('td.active').click();
 			return;
 		}
 
@@ -435,7 +435,7 @@ jQuery(document).ready(function($) {
 
 		//if its station list
 		if ($('.modal:visible').attr('id') === 'station-list') {
-			$(this).find('td.active').click();
+			$('#station-list').find('td.active').click();
 			return;
 		}
 
@@ -698,6 +698,13 @@ jQuery(document).ready(function($) {
 	$('#les-list td').on('click', function () {
 		$('#les-list td').removeClass('active').parent('tr').removeClass('active');
 		$(this).addClass('active').parent('tr').addClass('active');
+		var trs = $('#les-list:visible .modal-body tr:not(:first)');
+		var trCurrent = trs.filter('.active');
+		var trIndex = trs.index(trCurrent);
+		var tds = $(trCurrent).find('td:not(:first)');
+		var tdCurrent = tds.filter('.active');
+		var tdIndex = tds.index(tdCurrent);
+		var title = $($('#les-list:visible .modal-body tr:first td')[tdIndex+1]).text();
 		//close modals
 		$('.modal').modal('hide');
 		var id = $('#les-id input').val(''),
@@ -712,6 +719,7 @@ jQuery(document).ready(function($) {
 		if ($(this).attr('mark')) {
 			mark.val($(this).attr('mark'));
 		}
+		$('#les-edit .modal-header span').text(title.replace("Name"," No." + parseInt(trIndex+1)));
 		$('#les-edit').modal('show');
 	});
 
@@ -748,6 +756,9 @@ jQuery(document).ready(function($) {
 	$('#station-list td').on('click', function () {
 		$('#station-list td').removeClass('active');
 		$(this).addClass('active');
+		var tds = $('#station-list:visible .modal-body td:nth-child(even)');
+		var tdCurrent = tds.filter('.active');
+		var tdIndex = tds.index(tdCurrent);
 		//close modals
 		$('.modal').modal('hide');
 		var id = $('#edit-sid input').val(''),
@@ -771,6 +782,7 @@ jQuery(document).ready(function($) {
 		if ($(this).attr('cc')) {
 			cc.val($(this).attr('cc'));
 		}
+		$('#station-edit .modal-header span').text('Station No.' + parseInt(tdIndex+1));
 		$('#station-edit').modal('show');
 	});
 
