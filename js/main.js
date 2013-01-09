@@ -7,6 +7,7 @@ jQuery(document).ready(function($) {
 		date	: new Date(),
 		dte2port: '001',
 		disk	: false,
+		ncs		: 'AOR.E',
 		init	: function() {
 			var self = this;
 			//set datetime counter
@@ -191,7 +192,7 @@ jQuery(document).ready(function($) {
 			this.blink();
 		},
 		shutdown : function() {
-			$('.modal').modal('hide');
+			$('.modal:visible').modal('hide');
 			$('div.message').removeClass('active');
 			//remove not saved messages
 			$('div.message:not(.disk)').remove();
@@ -214,6 +215,10 @@ jQuery(document).ready(function($) {
 		},
 		sended : function() {
 			felcom.status('Successfull Sending message', 3000);
+			var text = $('.message.current').removeClass('current').find('.response').text();
+			setTimeout(function(){
+				felcom.recieve($('#station-name').text(), text);
+			}, 8100)
 		},
 		//set confirm dialog
 		confirm : function (text, callback) {
@@ -336,12 +341,18 @@ jQuery(document).ready(function($) {
 		if ($('.modal:visible').attr('id') === 'les-edit') {
 			setTimeout(function(){
 				$('#les-list').modal('show');
-			},500);
+			},300);
 		}
 		if ($('.modal:visible').attr('id') === 'station-edit') {
 			setTimeout(function(){
 				$('#station-list').modal('show');
-			},500);
+			},300);
+		}
+		if ($('.modal:visible').attr('id') === 'disk-message-dialog' && $('.modal:visible').hasClass('send-dialog')) {
+			$('.modal:visible').removeClass('send-dialog');
+			setTimeout(function(){
+				$('#send').modal('show');
+			},300);
 		}
 	}
 
@@ -355,11 +366,28 @@ jQuery(document).ready(function($) {
 			var text = $($('.message')[index]).find('textarea').text();
 			$(this).find('.body').text(text.substring(0,60))
 		}
+		if ($('.modal:visible').attr('id') === 'send') {
+			var active = $('.modal:visible').find('tr.active a').attr('href');
+			if (active.length > 1) {
+				$(active).addClass('send-dialog');
+				$('.modal:visible').modal('hide');
+				if (active === '#disk-message-dialog') {
+					felcom.open();
+				}
+				if (active === '#station-list') {
+					$('#station-list').modal('show');
+				}
+				if (active === '#les-list') {
+					$('#les-list').modal('show');
+				}
+			}
+		}
+		return false;
 	}
 
 	//close all modal windows when pressed functional button
 	$('.dropdown-toggle').on('click', function(){
-		$('.modal').modal('hide');
+		$('.modal:visible').modal('hide');
 	});
 	//close all modal windows when pressed enter
 	$(document).bind('keydown', 'return', returnPressed);
@@ -411,7 +439,27 @@ jQuery(document).ready(function($) {
 
 		//if its les list
 		if ($('.modal:visible').attr('id') === 'les-list') {
-			$('#les-list').find('td.active').click();
+			if (!$('.modal:visible').hasClass('send-dialog')) {
+				$('#les-list').find('td.active').click();
+			}
+			else {
+				$('#les-list').removeClass('send-dialog');
+				//felcom.status('Cannot use this LES. Please check network configuration.', 3000);
+				var les = $('#les-list td.active');
+				var index = les.parent().find('td').index(les);
+				if ($($('#les-list tr:first td')[index]).attr('felcom-key') === felcom.ncs) {
+					$('#lid').text(les.attr('id'));
+					$('.modal:visible').modal('hide');
+					$('#send').modal('show');
+				}
+				else {
+					$('.modal:visible').modal('hide');
+					felcom.status('Cannot use this LES. Please check network configuration.', 3000);
+					setTimeout(function() {
+						$('#send').modal('show');
+					},3100);
+				}
+			}
 			return;
 		}
 
@@ -428,14 +476,25 @@ jQuery(document).ready(function($) {
 				station.attr('id', '').attr('mark', '').text('');
 			}
 			//close modal
-			$('.modal').modal('hide');
+			$('.modal:visible').modal('hide');
 			$('#les-list').modal('show');
 			return;
 		}
 
 		//if its station list
 		if ($('.modal:visible').attr('id') === 'station-list') {
-			$('#station-list').find('td.active').click();
+			if (!$('.modal:visible').hasClass('send-dialog')) {
+				$('#station-list').find('td.active').click();
+			}
+			else {
+				var td = $('#station-list').find('td.active');
+				$('#station-list').removeClass('send-dialog');
+				$('#station-name').text(td.text());
+				$('#coc').text(td.attr('cc'));
+				$('#sid').text(td.attr('id'));
+				$('.modal:visible').modal('hide');
+				$('#send').modal('show');
+			}
 			return;
 		}
 
@@ -454,26 +513,40 @@ jQuery(document).ready(function($) {
 				station.attr('id', '').attr('mark', '').attr('cc', '').attr('type', '').text('');
 			}
 			//close modal
-			$('.modal').modal('hide');
+			$('.modal:visible').modal('hide');
 			$('#station-list').modal('show');
 			return;
 		}
 
 		if ($('.modal:visible').attr('id') === 'disk-message-dialog') {
-			//show message
-			setTimeout(function(){
-				$('#disk-loading').modal('show');
-			}, 10);
-			//blink diod
-			felcom.loading = setInterval(function(){felcom.blink()}, 60);
-			//call formatted thrught ten seconds
 			var messages = $('#disk-message-dialog tr:has(a)');
 			var selected = $('#disk-message-dialog tr.active');
 			var index = messages.index(selected);
-			setTimeout(function(){
-				$('#disk-loading').modal('hide');
-				felcom.opened(index);
-			}, 5000);
+			if (!$('.modal:visible').hasClass('send-dialog')) {
+				//show message
+				setTimeout(function(){
+					$('#disk-loading').modal('show');
+				}, 10);
+				//blink diod
+				felcom.loading = setInterval(function(){felcom.blink()}, 60);
+				//call formatted thrught ten seconds
+				setTimeout(function(){
+					$('#disk-loading').modal('hide');
+					felcom.opened(index);
+				}, 5000);
+			}
+			else {
+				$('#disk-message-dialog').removeClass('send-dialog');
+				var name = $($('.message')[index]).find('.modal-header span').html().slice(4,12).split('&gt;')[0],
+					size = $($('.message')[index]).find('.modal-body textarea').val().length;
+				$($('.message')[index]).addClass('current');
+				$('#send tr.send-data td:last').html(name + '&nbsp;&nbsp;&nbsp;Size ' + size);
+				$('.modal:visible').modal('hide');
+				setTimeout(function(){
+					$('#send').modal('show');
+				}, 100);
+				return;
+			}
 		}
 
 		if ($('.modal:visible').attr('id') === 'send') {
@@ -481,7 +554,7 @@ jQuery(document).ready(function($) {
 		}
 
 		//close modals
-		$('.modal').modal('hide');
+		$('.modal:visible').modal('hide');
 	}
 
 	//process left and right buttons
@@ -628,7 +701,7 @@ jQuery(document).ready(function($) {
  *		/____/\___/_/ /_/\__,_/
  */
 	$('#send-menu li a').on('click', function() {
-		$('.modal').modal('hide');
+		$('.modal:visible').modal('hide');
 		if ($(this).attr('href') == '#send') {
 			felcom.send();
 		}
@@ -706,7 +779,7 @@ jQuery(document).ready(function($) {
 		var tdIndex = tds.index(tdCurrent);
 		var title = $($('#les-list:visible .modal-body tr:first td')[tdIndex+1]).text();
 		//close modals
-		$('.modal').modal('hide');
+		$('.modal:visible').modal('hide');
 		var id = $('#les-id input').val(''),
 			name = $('#les-name input').val(''),
 			mark = $('#les-mark input').val('');
@@ -760,7 +833,7 @@ jQuery(document).ready(function($) {
 		var tdCurrent = tds.filter('.active');
 		var tdIndex = tds.index(tdCurrent);
 		//close modals
-		$('.modal').modal('hide');
+		$('.modal:visible').modal('hide');
 		var id = $('#edit-sid input').val(''),
 			name = $('#edit-station-name input').val(''),
 			cc = $('#edit-coc input').val(''),

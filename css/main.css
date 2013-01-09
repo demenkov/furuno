@@ -460,3 +460,7 @@ th {
 #station-list .modal-header {
 	margin-left:30%;
 }
+
+.response {
+	display:none;
+}

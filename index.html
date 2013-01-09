@@ -340,17 +340,17 @@
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<td><a href = "#">Message</a></td>
+								<tr class = "send-data">
+									<td><a href = "#disk-message-dialog">Message</a></td>
 									<td>
 										Message now begin edited
 									</td>
 								</tr>
 								<tr>
-									<td><a href = "#">Station name</a></td>
+									<td><a href = "#station-list">Station name</a></td>
 									<td>
 										<div id = "station-name">
-											<input maxlength = "15"></input>
+											<span class = "active">&nbsp;</span>
 										</div>
 									</td>
 								</tr>
@@ -389,26 +389,26 @@
 									</td>
 								</tr>
 								<tr>
-									<td><a href = "#">Country/Ocean code</a></td>
+									<td><a href = "#station-list">Country/Ocean code</a></td>
 									<td>
 										<div id = "coc" data = "numeric">
-											<input maxlength = "3"></input>
+											<span class = "active">&nbsp;</span>
 										</div>
 									</td>
 								</tr>
 								<tr>
-									<td><a href = "#">Station ID</a></td>
+									<td><a href = "#station-list">Station ID</a></td>
 									<td>
 										<div id = "sid" data = "numeric">
-											<input maxlength = "15"></input>
+											<span class = "active">&nbsp;</span>
 										</div>
 									</td>
 								</tr>
 								<tr>
-									<td><a href = "#">LES ID</a></td>
+									<td><a href = "#les-list">LES ID</a></td>
 									<td>
 										<div id = "lid" data = "numeric">
-											<input maxlength = "3"></input>
+											<span class = "active">&nbsp;</span>
 										</div>
 									</td>
 								</tr>
@@ -449,7 +449,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td></td>
+									<td>Space: open table</td>
 									<td>RET : Send Start</td>
 								</tr>
 							</table>
@@ -487,10 +487,10 @@
 							<table>
 								<tr>
 									<td>No</td>
-									<td>AOR(WEST)<br/>Name</td>
-									<td>AOR(EAST)<br/>Name</td>
-									<td>POR<br/>Name</td>
-									<td>IOR<br/>Name</td>
+									<td felcom-key = "AOR.W">AOR(WEST)<br/>Name</td>
+									<td felcom-key = "AOR.E">AOR(EAST)<br/>Name</td>
+									<td felcom-key = "POR">POR<br/>Name</td>
+									<td felcom-key = "IOR">IOR<br/>Name</td>
 								</tr>
 								<tr>
 									<td>1</td>
@@ -695,6 +695,10 @@
 with the Japan ship “Nakamura” at 20:20 GMT. We are afload. But I have a leakage on
 starboard.</textarea>
 						</div>
+					<div class = "response">
+						Understood. I know you dangerous situation. I`m sending 2 salvige vessels, they are
+coming to your assistance as quickly as possiple.
+					</div>
 					</div>
 					<div class = "message disk" tabindex="-1" msg-date = "91-01-11" msg-time = "09:09">
 						<div class="modal-header"><span>&lt;Message2&gt;</span></div>
