@@ -16,13 +16,13 @@
 		<div id = "status-bar">
 			<div id = "diods">
 				<table>
-					<tr><td><h4><span class = "lamp"></span>POWER</h4></td></tr>
-					<tr><td><h4><span class = "lamp"></span>SYNC</h4></td></tr>
-					<tr><td><h4><span class = "lamp"></span>LOGIN</h4></td></tr>
-					<tr><td><h4><span class = "lamp"></span>SEND</h4></td></tr>
-					<tr><td><h4><span class = "lamp"></span>RECIEVE</h4></td></tr>
-					<tr><td><h4><span class = "lamp"></span>DISTRESS</h4></td></tr>
-					<tr><td><h4><span class = "lamp"></span>FQIL</h4></td></tr>
+					<tr><td><h4><span class = "lamp active"></span>POWER</h4></td></tr>
+					<tr><td><h4><span class = "lamp sync-indication"></span>SYNC</h4></td></tr>
+					<tr><td><h4><span class = "lamp login"></span>LOGIN</h4></td></tr>
+					<tr><td><h4><span class = "lamp send"></span>SEND</h4></td></tr>
+					<tr><td><h4><span class = "lamp recieve"></span>RECIEVE</h4></td></tr>
+					<tr><td><h4><span class = "lamp red"></span>DISTRESS</h4></td></tr>
+					<tr><td><h4><span class = "lamp red"></span>FQIL</h4></td></tr>
 				</table>
 			</div>
 		</div>
@@ -83,7 +83,7 @@
 							</a>
 							<ul class="dropdown-menu f4" aria-labelledby="f4" role="menu">
 								<li><a href = "#">1:Abort</a></li>
-								<li><a href = "#">2:Login</a></li>
+								<li><a id = "login" href = "#">2:Login</a></li>
 								<li><a href = "#">3:Logout</a></li>
 								<li><a href = "#">4:Scan NCS</a></li>
 								<li><a href = "#">5:Select NCS</a></li>
@@ -317,7 +317,16 @@
 						<div class="modal-body">
 							<ul class = "nav">
 								<li>
-									<a href = "#send">1:Send message</a>
+									<a href = "#send">1:Send Message</a>
+								</li>
+								<li>
+									<a href = "#">2:Cancel</a>
+								</li>
+								<li>
+									<a href = "#">3:Request Delivery Status</a>
+								</li>
+								<li>
+									<a href = "#">4:Message Status List</a>
 								</li>
 							</ul>
 						</div>
@@ -759,7 +768,7 @@ coming to your assistance as quickly as possiple.
 					<table>
 						<tr>
 							<td>Current state: <span class = "state">IDLE</span></td>
-							<td><span class = "sync">Unsync</span></td>
+							<td><span class = "sync">UNSYNC</span></td>
 							<td><span class = "date"></span></td>
 						</tr>
 						<tr>

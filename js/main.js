@@ -8,6 +8,7 @@ jQuery(document).ready(function($) {
 		dte2port: '001',
 		disk	: false,
 		ncs		: 'AOR.E',
+		login	: false,
 		init	: function() {
 			var self = this;
 			//set datetime counter
@@ -181,6 +182,14 @@ jQuery(document).ready(function($) {
 			}
 			return true;
 		},
+		checklogin : function() {
+			console.log(this.login)
+			if (!this.login) {
+				felcom.status('Not logged in.', 3000);
+				return false;
+			}
+			return true;
+		},
 		poweronoff : function() {
 			$('#monitor-button').toggleClass('enabled');
 			$('#display').css('visibility', ($('#display').css('visibility') == 'hidden') ? 'visible' : 'hidden' );
@@ -205,17 +214,21 @@ jQuery(document).ready(function($) {
 			}, 30);
 		},
 		send : function() {
-			$('#send').modal('show');
+			if (felcom.checklogin()) {
+				$('#send').modal('show');
+			}
 			return false;
 		},
 		sending : function() {
 			felcom.status('Message is entered<br/>in<br/>sending buffer', 3000);
 			felcom.state('SENDING', 10000, felcom.sended);
+			$('span.send.lamp').addClass('active');
 			return false;
 		},
 		sended : function() {
 			felcom.status('Successfull Sending message', 3000);
 			var text = $('.message.current').removeClass('current').find('.response').text();
+			$('span.send.lamp').removeClass('active');
 			setTimeout(function(){
 				felcom.recieve($('#station-name').text(), text);
 			}, 8100)
@@ -258,8 +271,28 @@ jQuery(document).ready(function($) {
 			}, interval);
 		},
 		recieve : function(from, message) {
-			$('<div class = "message active receive" tabindex="-1"><div class="modal-header"><span>Display Receive Message &lt;R' + felcom.date.toString("0yyMMdd") + '.001&gt;</span></div><div class="modal-body">FROM: '+from+'<br/>TO FELCOM:<br/>' +message+ '</div></div>').insertAfter('.message:last');
+			felcom.state('RECIEVING', 5000);
+			$('span.recieve.lamp').addClass('active');
+			setTimeout(function(){
+				$('span.recieve.lamp').removeClass('active');
+				$('<div class = "message active receive" tabindex="-1"><div class="modal-header"><span>Display Receive Message &lt;R' + felcom.date.toString("0yyMMdd") + '.001&gt;</span></div><div class="modal-body">FROM: '+from+'<br/>TO FELCOM:<br/>' +message+ '</div></div>').insertAfter('.message:last');
+			},5100);
 		},
+		startLogin : function() {
+			felcom.state('LOGIN', 5000);
+			$('span.sync').text('SYNC(NCS)');
+			$('span.sync-indication.lamp').addClass('active');
+			setTimeout(function(){
+				felcom.loggedIn();
+			},5100);
+			return false;
+		},
+		loggedIn : function() {
+			$('span.ncs').parent().html('NCS: <span class = "ncs">' + felcom.ncs + '</span> LOGIN');
+			felcom.status('Successfull Login', 3000);
+			$('span.login.lamp').addClass('active');
+			felcom.login = true;
+		}
 	};
 
 	//add events for functional buttons
@@ -859,6 +892,16 @@ jQuery(document).ready(function($) {
 		$('#station-edit').modal('show');
 	});
 
+/*	    __                _
+ *	   / /   ____  ____ _(_)___
+ *	  / /   / __ \/ __ `/ / __ \
+ *	 / /___/ /_/ / /_/ / / / / /
+ *	/_____/\____/\__, /_/_/ /_/
+ *	            /____/
+ */
+	$('#login').on('click', function() {
+		felcom.confirm('Start Login', felcom.startLogin);
+	})
 
 	//add events for numeric buttons
 	$(document).bind('keydown', '1', inputPressed);
