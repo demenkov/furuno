@@ -1,6 +1,11 @@
 //main function
 jQuery(document).ready(function($) {
 
+		$('#miniature').on('click', function() {
+			$(this).hide();
+			$('#content').show();
+		});
+
 		var felcom = {
 		lat		: '54:43:12',
 		lon		: '020:30:07',
@@ -192,11 +197,13 @@ jQuery(document).ready(function($) {
 		},
 		poweronoff : function() {
 			$('#monitor-button').toggleClass('enabled');
+			$('span.lamp.power').toggleClass('active');
 			$('#display').css('visibility', ($('#display').css('visibility') == 'hidden') ? 'visible' : 'hidden' );
 			felcom.shutdown();
 		},
 		insertremove : function() {
 			$('#floppy .button').toggleClass('enabled');
+			$('#disk').css('opacity', this.disk ? 1 : 0.4);
 			this.disk = $('#floppy .button').hasClass('enabled');
 			this.blink();
 		},
@@ -274,8 +281,9 @@ jQuery(document).ready(function($) {
 			felcom.state('RECIEVING', 5000);
 			$('span.recieve.lamp').addClass('active');
 			setTimeout(function(){
+				felcom.close();
 				$('span.recieve.lamp').removeClass('active');
-				$('<div class = "message active receive" tabindex="-1"><div class="modal-header"><span>Display Receive Message &lt;R' + felcom.date.toString("0yyMMdd") + '.001&gt;</span></div><div class="modal-body">FROM: '+from+'<br/>TO FELCOM:<br/>' +message+ '</div></div>').insertAfter('.message:last');
+				$('<div class = "message active receive" tabindex="-1"><div class="modal-header"><span>Display Receive Message &lt;R' + felcom.date.toString("0yyMMdd") + '.001&gt;</span></div><div class="modal-body">FROM: '+from+'<br/>TO: FELCOM<br/>' +message+ '</div></div>').insertAfter('.message:last');
 			},5100);
 		},
 		startLogin : function() {
@@ -724,6 +732,10 @@ jQuery(document).ready(function($) {
 	});
 
 	$('#floppy .button').on('click', function() {
+		felcom.insertremove();
+	});
+
+	$('#disk').on('click', function() {
 		felcom.insertremove();
 	});
 

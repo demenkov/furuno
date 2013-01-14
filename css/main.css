@@ -266,7 +266,7 @@ td.active {
 	color		: #FFFFFF;
 	width		: 97%;
 	border		: none;
-	height 		: 370px
+	height 		: 340px;
 }
 
 .message textarea:focus {
@@ -414,7 +414,6 @@ th {
 }
 
 #diods{
-	margin-top:255px;
 	background	: gray;
 	min-height	: 500px;
 	height		: 500px;
@@ -467,4 +466,27 @@ th {
 
 .response {
 	display:none;
+}
+
+#disk {
+	min-height	:203px;
+	height		:203px;
+	margin		: 25px 0;
+	background	:url('../img/floppy.jpg') no-repeat;
+}
+
+#content {
+	display:none;
+}
+
+#miniature {
+	min-width	:617px;
+	width		:100%;
+	min-height	:800px;
+	height		:100%;
+	background	:url('../img/picture.gif') no-repeat;
+	-moz-background-size: 100%;
+	-webkit-background-size: 100%;
+	-o-background-size: 100%;
+	background-size: 100%;
 }
