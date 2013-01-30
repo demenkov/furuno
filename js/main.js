@@ -228,8 +228,21 @@ jQuery(document).ready(function($) {
 		},
 		sending : function() {
 			felcom.status('Message is entered<br/>in<br/>sending buffer', 3000);
-			felcom.state('SENDING', 10000, felcom.sended);
-			$('span.send.lamp').addClass('active');
+			//normal message
+			if (felcom.priority == 'normal') {
+				felcom.state('SENDING', 10000, felcom.sended);
+				$('span.send.lamp').addClass('active');
+			}
+			//distress message
+			else {
+				felcom.state('DISTRESS', 10000, felcom.distress);
+				felcom.distressdiod = setInterval(function(){
+					$('span.distress.lamp').toggleClass('active');
+					setTimeout(function() {
+						$(diod).toggleClass('active');
+					}, 30);
+				}, 60);
+			}
 			return false;
 		},
 		sended : function() {
@@ -239,6 +252,11 @@ jQuery(document).ready(function($) {
 			setTimeout(function(){
 				felcom.recieve($('#station-name').text(), text);
 			}, 8100)
+		},
+		distress : function() {
+			clearInterval(felcom.distressdiod);
+			$('span.distress.lamp').removeClass('active');
+			felcom.status('DISTRESS ALERT ACKNOWLEDGE RECEIVED', 3000);
 		},
 		//set confirm dialog
 		confirm : function (text, callback) {
@@ -750,6 +768,14 @@ jQuery(document).ready(function($) {
 		if ($(this).attr('href') == '#send') {
 			felcom.send();
 		}
+	});
+
+	$('#send').on('hide', function(){
+		$(this).find('.btn-group').each(function(){
+			if ($(this).attr('felcom-key')) {
+				felcom[$(this).attr('felcom-key')] = $(this).find('.active span.text').attr('felcom-val');
+			}
+		});
 	});
 /*
  *	 	   ______            _____
